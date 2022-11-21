@@ -158,15 +158,13 @@
 
                     
                     {% endif %} 
-						<!-- <span class="mtext-106 cl2" style="text-decoration: line-through;">
-							₹{{p.price}}
-						</span> -->
+						
 
 						<p class="stext-102 cl3 p-t-23 font-weight-bold" style="font-size: 20px;">
 						{{p.des}}
 						</p>
 						
-						<!--  -->
+					
 
 						{% if p.stock > 1 %}
 						<div class="p-t-33">
@@ -197,17 +195,7 @@
 						<div class="p-t-33">
 							<div class="flex-w flex-r-m p-b-10">
 								<div class="size-204 flex-w flex-m respon6-next">
-									<!-- <div class="wrap-num-product flex-w m-r-20 m-tb-10">
-										<div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
-											<i class="fs-16 zmdi zmdi-minus"></i>
-										</div>
-
-										<input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product" value="1">
-
-										<div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
-											<i class="fs-16 zmdi zmdi-plus"></i>
-										</div>
-									</div> -->
+									
 
 									
 										<h3 >
@@ -253,92 +241,6 @@
 	
 
 	
-	  <!-- <div class="row isotope-grid">
-
-		{%for p in pro %}
-<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
-
-
-	
-
-	<div class="block2">
-		<div class="block2-pic hov-img0">
-
-			<a href="/admins/productinfo/{{p.id}}">
-			<img src="{{p.img.url}}" alt="IMG-PRODUCT">
-			</a>
-
-
-		</div>
-
-		<div class="block2-txt flex-w flex-t p-t-14">
-			<div class="block2-txt-child1 flex-col-l ">
-				<a href="/admins/productinfo/{{p.id}}" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-					{{p.product_name}}
-				</a>
-
-				{%if p.p_offer_price < 1 and p.c_offer_price < 1  %}
-					<span class="stext-105 cl3" style="font-weight: bold;">
-						₹{{p.price}}
-					</span>
-
-				{%elif p.p_offer_price > 1 and p.c_offer_price is 0 %}
-					<span class="stext-105 cl3" style=" text-decoration: line-through;">
-						₹{{p.price}} // {{p.p_offer}}%
-					</span>
-				   <span style="font-weight: 400;">{{p.p_offer}}% OFF</span> 
-
-					<span class="stext-105 cl3" style="font-weight: bold;">
-						₹{{p.p_offer_price}}
-					</span>
-				{%elif p.p_offer_price < 1 and p.c_offer_price > 1 %}
-
-					<span class="stext-105 cl3" style=" text-decoration: line-through;">
-						₹{{p.price}} 
-					</span>
-				   <span style="font-weight: 400;">{{p.c_offer}}% OFF</span> 
-
-					<span class="stext-105 cl3" style="font-weight: bold;">
-						₹{{p.c_offer_price}}
-					</span>
-				
-				{%elif p.p_offer_price < p.c_offer_price and p.c_offer_price > 1 %}
-					<span class="stext-105 cl3" style=" text-decoration: line-through;">
-						₹{{p.price}} 
-					</span>
-				   <span style="font-weight: 400;">{{p.p_offer}}% OFF</span> 
-
-					<span class="stext-105 cl3" style="font-weight: bold;">
-						₹{{p.p_offer_price}}
-					</span>
-				{%elif p.c_offer_price < p.p_offer_price and p.p_offer_price > 1 %}
-					<span class="stext-105 cl3" style=" text-decoration: line-through;">
-						₹{{p.price}} 
-					</span>
-				   <span style="font-weight: 400;">{{p.c_offer}}% OFF</span> 
-					<span class="stext-105 cl3" style="font-weight: bold;">
-						₹{{p.c_offer_price}}
-					</span>
-				{%elif p.c_offer_price == p.p_offer_price and p.p_offer_price > 1 and p.c_offer_price > 1 %}
-					<span class="stext-105 cl3" style=" text-decoration: line-through;">
-						₹{{p.price}}  
-					</span>
-					<span style="font-weight: 400;">{{p.p_offer}}% OFF</span> 
-
-					<span class="stext-105 cl3" style="font-weight: bold;">
-						₹{{p.p_offer_price}}
-					</span>
-				{% else %}
-
-				
-				{% endif %}  
-			</div>
-		</div>
-	</div>
-</div>
-{% endfor %}
-
-</div> 	 -->
 		
 
 
