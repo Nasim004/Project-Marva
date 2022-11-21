@@ -480,6 +480,38 @@ def product_offer_remove(request,id):
     return redirect('offerlist')
 
 
+def product_offer_edit(request,id): 
+  if request.user.is_superuser:  
+    offer= product_offer.objects.get(id=id)
+    product=product_details.objects.all()
+    return render(request,'edit_p_offer.html',{'offer':offer,'product':product} )
+
+
+def product_offer_update(request,id):
+    if request.method == 'POST':
+
+        product1=product_offer.objects.get(id=id)
+
+        name=request.POST.get('name')        
+        offer=request.POST.get('offer')    
+        product=request.POST.get('id')
+        start_date=request.POST.get('startdate')    
+        end_date=request.POST.get('enddate')    
+
+
+
+        product=product_details.objects.get(id=product)  
+
+        product1.name=name
+        product1.offer=offer
+        product1.product=product
+        product1.start_date=start_date
+        product1.end_date=end_date
+
+        product1.save()
+        return redirect(offerlist)
+
+
 
 
 
@@ -541,12 +573,52 @@ def unblock_c_offer(request,id):
 def cat_offer_remove(request,id):
     offer=cat_offer.objects.get(id=id)
     p_id=offer.category_id
-    category=Category.objects.get(category_id=p_id)
+    category=Category.objects.get(id=p_id)
     category.c_offer=0
     category.c_offer_price=0
     category.save()
     offer.delete()
     return redirect(offerlist)
+
+
+def cat_offer_edit(request,id): 
+  if request.user.is_superuser:  
+    offer= cat_offer.objects.get(id=id)
+    category=Category.objects.all()
+    return render(request,'edit_c_offer.html',{'offer':offer,'category':category} )
+
+
+def cat_offer_update(request,id):
+    if request.method == 'POST':
+
+        category1=cat_offer.objects.get(id=id)
+
+        name=request.POST.get('name')        
+        offer=request.POST.get('offer')    
+        category=request.POST.get('id')
+        upto=request.POST.get('upto')     
+        start_date=request.POST.get('startdate')    
+        end_date=request.POST.get('enddate')    
+
+
+
+        category=Category.objects.get(id=category)  
+
+        category1.name=name
+        category1.offer=offer
+        category1.category=category
+        category1.up_to=upto
+        category1.start_date=start_date
+        category1.end_date=end_date
+
+        category1.save()
+        return redirect(offerlist)
+
+
+
+
+
+
 
 
 @never_cache
@@ -591,3 +663,43 @@ def unblock_coupon(request,id):
     c.is_active=True
     c.save()
     return redirect(couponlist)
+
+
+
+def coupon_delete(request,id):
+    c=Coupons.objects.get(id=id)
+    c.delete()
+    return redirect(couponlist)
+
+
+def coupon_edit(request,id): 
+  if request.user.is_superuser:  
+    coupon= Coupons.objects.get(id=id)
+    return render(request,'coupon_edit.html',{'coupon':coupon} )
+
+
+def coupon_update(request,id):
+    if request.method == 'POST':
+
+        coupon=Coupons.objects.get(id=id)
+
+        name=request.POST.get('name')        
+        minamount=request.POST.get('minamount')    
+        disamount=request.POST.get('disamount')     
+        start_date=request.POST.get('startdate')    
+        end_date=request.POST.get('enddate')    
+        code=request.POST.get('code')
+
+
+
+       
+
+        coupon.name=name
+        coupon.min_amount=minamount
+        coupon.discount_amount=disamount
+        coupon.start_date=start_date
+        coupon.end_date=end_date
+        coupon.code=code
+        coupon.save()
+        return redirect(couponlist)
+

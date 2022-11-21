@@ -50,6 +50,15 @@ urlpatterns=[
     path('product_edit/<int:id>',views.product_edit,name='product_edit'),
     path('product_update/<int:id>',views.product_update,name='product_update'),
     path('product/<int:id>',views.product,name='product'),
+    path('product_offer_edit/<int:id>',views.product_offer_edit,name='product_offer_edit'),
+    path('product_offer_update/<int:id>',views.product_offer_update,name='product_offer_update'),
+    path('cat_offer_edit/<int:id>',views.cat_offer_edit,name='cat_offer_edit'),
+    path('cat_offer_update/<int:id>',views.cat_offer_update,name='cat_offer_update'),
+
+
+
+
+
 
     path('blockuser/<int:id>',views.blockuser,name='blockuser'),
     path('unblockuser/<int:id>',views.unblockuser,name='unblockuser'),
@@ -63,6 +72,15 @@ urlpatterns=[
 
     path('block_coupon/<int:id>',views.block_coupon,name='block_coupon'),
     path('unblock_coupon/<int:id>',views.unblock_coupon,name='unblock_coupon'),
+    path('coupon_delete/<int:id>',views.coupon_delete,name='coupon_delete'),
+    path('coupon_edit/<int:id>',views.coupon_edit,name='coupon_edit'),
+    path('coupon_update/<int:id>',views.coupon_update,name='coupon_update'),
+
+
+
+
+
+
 
 
 

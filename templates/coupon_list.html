@@ -162,6 +162,18 @@
               {% endif %}
                </td>
 
+               <td>
+                <a href="coupon_edit/{{c.id}}">
+                <i class="fas fa-edit" style="color: white;"></i>
+                </a>
+               </td>
+
+
+
+               <td>
+                <i class="far fa-trash-alt " data-toggle="modal" data-target="#modalcoupondelete{{c.id}}"></i> 
+               </td>
+
 
            
           </tr>
@@ -204,6 +216,29 @@
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                   <a href="unblock_coupon/{{c.id}}">
                   <button type="button" class="btn btn-primary">UnBlock</button>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="modal fade" id="modalcoupondelete{{c.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Delete Coupon</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                Are you want to Delete ?
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <a href="coupon_delete/{{c.id}}">
+                  <button type="button" class="btn btn-primary">Delete</button>
                   </a>
                 </div>
               </div>

@@ -107,10 +107,11 @@
 
 
 
-<div class="conatiner">
+<div class="content">
 <div class="row mt-5">
-<div class="col ">
 
+
+<div class="col-6">
     <div class="card-header d-flex">
         <div style = "width:95%;">
         <h3 style="color: white;">Product Offer Management</h3>
@@ -129,8 +130,8 @@
             <th scope="col">START DATE</th>
             <th scope="col">END DATE</th>
             <th scope="col">OFFER</th>
-            <th scope="col">BLOCK</th>
-            <th scope="col" >DELETE</th>
+            <!-- <th scope="col">BLOCK</th>
+            <th scope="col" >DELETE</th> -->
 
           </tr>
         </thead>
@@ -147,7 +148,7 @@
             {%if p.is_active %}  
 
             <!-- <a href="block_p_offer/{{p.id}}" data-toggle="modal" data-target="#exampleModalbpf{{p.id}}" > -->
-                <button style="font-size:13px ;" type="button" class="btn btn-warning"data-toggle="modal" data-target="#exampleModalbpf{{p.id}}">Block</button>
+                <button style="font-size:13px ;" type="button" class="btn btn-warning"  data-toggle="modal" data-target="#exampleModalbpf{{p.id}}">Block</button>
               <!-- </a> -->
 
           {%else%}
@@ -157,9 +158,19 @@
           <!-- </a> -->
           {% endif %}
            </td>
-           <td>
 
-          <button  type="button" class="btn btn-outline-warning ml-3" data-toggle="modal" data-target="#modaldelete{{p.id}}">Delete</button>
+
+           <td>
+            <a href="product_offer_edit/{{p.id}}">
+            <i class="fas fa-edit" style="color: white;"></i>
+            </a>
+           </td>
+
+
+           <td>
+            <i class="far fa-trash-alt tm-product-delete-icon" data-toggle="modal" data-target="#modaldelete{{p.id}}" ></i> 
+
+          <!-- <button  type="button" class="btn btn-outline-warning ml-3" data-toggle="modal" data-target="#modaldelete{{p.id}}">Delete</button> -->
 
            </td>
 
@@ -241,9 +252,8 @@
       </table>
 </div>
 
-<div class="col  ">
 
-
+<div class="col-6">
     <div class="card-header d-flex">
         <div style = "width:95%;">
         <h3 style="color: white;">Category Offer Management</h3>
@@ -262,8 +272,8 @@
             <th scope="col">END DATE</th>
             <th scope="col">OFFER</th>
             <th scope="col">UPTO</th>
-            <th scope="col">BLOCK</th>
-            <th scope="col">DELETE</th>
+            <!-- <th scope="col">BLOCK</th>
+            <th scope="col">DELETE</th> -->
 
 
           </tr>
@@ -282,20 +292,30 @@
                 {%if c.is_active %}  
     
                 <!-- <a href="block_c_offer/{{c.id}}" data-toggle="modal" data-target="#exampleModalbcf{{c.id}}" > -->
-                    <button style="font-size:13px ;" type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModalbcf{{c.id}}">Block</button>
+                    <button style="font-size:13px ;" type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#exampleModalbcf{{c.id}}">Block</button>
                   <!-- </a> -->
     
               {%else%}
     
               <!-- <a href="unblock_c_offer/{{c.id}}" data-toggle="modal" data-target="#exampleModalubcf{{c.id}}" > -->
-                <button style="font-size:13px ;" type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModalubcf{{c.id}}">UnBlock</button>
+                <button style="font-size:13px ;" type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#exampleModalubcf{{c.id}}">UnBlock</button>
               <!-- </a> -->
               {% endif %}
                </td>
 
-               <td>
+               
 
-                <button  type="button" class="btn btn-outline-warning ml-3" data-toggle="modal" data-target="#modalcatdelete{{c.id}}">Delete</button>
+               <td>
+                <a href="cat_offer_edit/{{c.id}}">
+                <i class="fas fa-edit" style="color: white;"></i>
+                </a>
+               </td>
+
+               <td>
+                <i class="far fa-trash-alt " data-toggle="modal" data-target="#modalcatdelete{{c.id}}"></i> 
+
+
+                <!-- <button  type="button" class="btn btn-outline-warning btn-sm" data-toggle="modal" data-target="#modalcatdelete{{c.id}}">Delete</button> -->
       
                 </td>
 
@@ -362,7 +382,7 @@
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  <a href="cat_offer_remove/{{p.id}}">
+                  <a href="cat_offer_remove/{{c.id}}">
                   <button type="button" class="btn btn-primary">Delete</button>
                   </a>
                 </div>
@@ -370,11 +390,11 @@
             </div>
           </div>
           {%endfor%}
-          
-         
         </tbody>
       </table>
 </div>
+
+
 </div>
 </div>
 
