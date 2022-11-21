@@ -1,0 +1,341 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>MARVA</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script type="text/javascript">
+    var jQuery_1_7_1 = $.noConflict(true);
+    </script>	
+
+
+	<link rel="icon" type="image/png"  href="{% static 'images/icons/favicon.png' %}"/>
+	<link rel="stylesheet" type="text/css"  href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}">
+	<link rel="stylesheet" type="text/css"  href="{% static 'fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+	<link rel="stylesheet" type="text/css"  href="{% static 'fonts/iconic/css/material-design-iconic-font.min.css' %}">
+	<link rel="stylesheet" type="text/css"  href="{% static 'fonts/linearicons-v1.0.0/icon-font.min.css' %}">
+	<link rel="stylesheet" type="text/css"  href="{% static 'vendor/animate/animate.css' %}">
+	<link rel="stylesheet" type="text/css"  href="{% static 'vendor/css-hamburgers/hamburgers.min.css' %}">
+	<link rel="stylesheet" type="text/css"  href="{% static 'vendor/animsition/css/animsition.min.css' %}">
+	<link rel="stylesheet" type="text/css"  href="{% static 'vendor/select2/select2.min.css' %}">
+	<link rel="stylesheet" type="text/css"  href="{% static 'vendor/daterangepicker/daterangepicker.css' %}">
+	<link rel="stylesheet" type="text/css"  href="{% static 'vendor/slick/slick.css' %}">
+	<link rel="stylesheet" type="text/css"  href="{% static 'vendor/MagnificPopup/magnific-popup.css' %}">
+	<link rel="stylesheet" type="text/css"  href="{% static 'vendor/perfect-scrollbar/perfect-scrollbar.css' %}">
+	<link rel="stylesheet" type="text/css"  href="{% static 'css/util.css' %}">
+	<link rel="stylesheet" type="text/css"  href="{% static 'css/main.css' %}">
+
+
+
+
+</head>
+<style>
+	.myaccount:hover{
+		cursor: pointer;
+	}
+</style>
+<body class="animsition">
+	
+	<!-- Header -->
+	<header >
+		<!-- Header desktop -->
+		<div class="container-menu-desktop" >
+			<!-- Topbar -->
+			<div class="top-bar">
+				<div class="content-topbar flex-sb-m h-full container">
+					<div class="left-top-bar">
+
+						{%if user.is_authenticated %}
+							Hi <span style="font-weight: bold ; color:#fddf49" >{{user.last_name}}</span> welcome to MARVA Gold
+						{%else%}
+							Hi !! welcome to MARVA Gold
+						{%endif%}
+
+					</div>
+
+					<div class="right-top-bar flex-w h-full">
+						<!-- <a  href="{% static '#" class="flex-c-m trans-04 p-lr-25">
+							Help & FAQs
+						</a> -->
+						
+
+						{% if user.is_authenticated %}
+
+							<a  href="/accounts/logout" class="flex-c-m trans-04 p-lr-25">
+								Logout
+							</a>
+						
+						{%else%}	
+
+							<a  href="/accounts/login" class="flex-c-m trans-04 p-lr-25">
+								Sign in
+							</a>
+
+							<a  href="/accounts/register" class="flex-c-m trans-04 p-lr-25">
+								Sign up
+							</a>
+						{%endif%}	
+
+
+
+					</div>
+				</div>
+			</div>
+
+			<div class="wrap-menu-desktop">
+				<nav class="limiter-menu-desktop container">
+					
+					<!-- Logo desktop -->		
+					<a  href="/" class="logo">
+						<p style="color: black;font-weight:900;font-size:35px">MARVA</p>
+						<!-- <img  src="{% static 'images/icons/logo-01.png' %}" alt="IMG-LOGO"> -->
+					</a>
+
+					<!-- Menu desktop -->
+					<div class="menu-desktop">
+						<ul class="main-menu">
+							<li class="active-menu">
+								{% if user.is_authenticated %}
+								<p  class="myaccount" style="color: black;">My Account</p>
+								<ul class="sub-menu">
+									<li><span style="font-weight: bold;">Hello {{user.first_name}}</span></li>
+									<li><a  href="/admins/userprofile">My Profile</a></li>
+									<li><a  href="/cart/myorder">My Orders</a></li>
+									<!-- <li><a  href="{% static '#">Wishlist</a></li> -->
+									
+
+								</ul>
+								{%else%}
+								
+								
+								{%endif%}
+
+
+							</li>
+
+                            <li>
+								<a  href="/admins/product/4">Necklace</a>
+							</li>
+                            <li>
+								<a  href="/admins/product/8">Rings</a>
+							</li>
+                            <li>
+								<a  href="/admins/product/14">Bangles</a>
+							</li>
+                            <li>
+								<a  href="/admins/product/15">Earrings</a>
+							</li>
+							<!-- {% for c in category %}
+
+							<li>
+								<a  href="/admins/product/{{c.id}}">{{c.category_name}}</a>
+							</li>
+							
+							{% endfor %} -->
+
+
+							<li>
+								<a  href="#">Contact</a>
+							</li>
+
+
+
+						</ul>
+					</div>	
+
+					<!-- Icon header -->
+					<div class="wrap-icon-header flex-w flex-r-m ">
+						<!-- <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-modal-search">
+							<i class="zmdi zmdi-search"></i>
+						</div> -->
+
+
+						<!-- <a  href="{% static '#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 " >
+							<i class="zmdi zmdi-favorite-outline"></i>
+						</a> -->
+
+						<!-- <a  href="{% static '#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti" data-notify="3">
+							<i class="zmdi zmdi-favorite-outline"></i>
+						</a> -->
+
+						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11  js-show-cart" >
+							<a href="/cart/cart" style="color:black;"><i class="zmdi zmdi-shopping-cart"></i></a>
+						</div>
+					</div>
+				</nav>
+			</div>	
+		</div>
+
+		<!-- Header Mobile -->
+		<div class="wrap-header-mobile">
+			<!-- Logo moblie -->		
+			<div class="logo-mobile">
+				<a  href="{% static '#" class="logo">
+					<p style="color: black;font-weight:900;font-size:35px">MARVA</p>
+				</a>
+			</div>
+
+			<!-- Icon header -->
+			<div class="wrap-icon-header flex-w flex-r-m m-r-15">
+
+
+				<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11  js-show-cart" >
+					<a href="/cart/cart" style="color:black;"><i class="zmdi zmdi-shopping-cart"></i></a>
+				</div>
+
+
+			</div>
+
+			<!-- Button show menu -->
+			<div class="btn-show-menu-mobile hamburger hamburger--squeeze">
+				<span class="hamburger-box">
+					<span class="hamburger-inner"></span>
+				</span>
+			</div>
+		</div>
+
+
+		<!-- Menu Mobile -->
+		<div class="menu-mobile">
+			<ul class="topbar-mobile">
+				<li>
+					<div class="left-top-bar">
+						Hi {{user.first_name}} !! welcome to MARVA Gold
+					</div>
+				</li>
+
+				<li>
+					{% if user.is_authenticated %}
+
+					<a  href="/accounts/logout" class="flex-c-m trans-04 p-lr-25">
+						Logout
+					</a>
+				
+				{%else%}	
+
+					<a  href="/accounts/login" class="flex-c-m trans-04 p-lr-25">
+						Sign in
+					</a>
+
+					<a  href="/accounts/register" class="flex-c-m trans-04 p-lr-25">
+						Sign up
+					</a>
+				{%endif%}	
+				</li>
+			</ul>
+
+			<ul class="main-menu-m">
+				{% if user.is_authenticated %}
+				<li>
+					
+					<a  href="{% static '#">My Profile</a>
+					<ul class="sub-menu-m">
+						<li><a href="">Hello {{user.first_name}}</a></li>
+						<li><a  href="/admins/userprofile">My Profile</a></li>
+						<li><a  href="/cart/myorder">My Orders</a></li>
+						
+
+					</ul>
+					<span class="arrow-main-menu-m">
+						<i class="fa fa-angle-right" aria-hidden="true"></i>
+					</span>
+				</li>
+				{%else%}
+
+				{%endif%}
+
+                
+
+				<li>
+					<a  href="/admins/product/4">Necklace</a>
+				</li>
+				<li>
+					<a  href="/admins/product/8">Rings</a>
+				</li>
+				<li>
+					<a  href="/admins/product/14">Bangles</a>
+				</li>
+				<li>
+					<a  href="/admins/product/15">Earrings</a>
+				</li>
+
+               
+
+			</ul>
+		</div>
+
+        {% block content %}
+
+        {%endblock%}
+
+
+        <script  src="{% static 'vendor/jquery/jquery-3.2.1.min.js' %}"></script>
+        <script  src="{% static 'vendor/animsition/js/animsition.min.js' %}"></script>
+        <script  src="{% static 'vendor/bootstrap/js/popper.js' %}"></script>
+        <script  src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+        <script  src="{% static 'vendor/select2/select2.min.js' %}"></script>
+        <script>
+            $(".js-select2").each(function(){
+                $(this).select2({
+                    minimumResultsForSearch: 20,
+                    dropdownParent: $(this).next('.dropDownSelect2')
+                });
+            })
+        </script>
+        <script  src="{% static 'vendor/daterangepicker/moment.min.js' %}"></script>
+        <script  src="{% static 'vendor/daterangepicker/daterangepicker.js' %}"></script>
+        <script  src="{% static 'vendor/slick/slick.min.js' %}"></script>
+        <script  src="{% static 'js/slick-custom.js' %}"></script>
+        <script  src="{% static 'vendor/parallax100/parallax100.js' %}"></script>
+        <script>
+            $('.parallax100').parallax100();
+        </script>
+        <script  src="{% static 'vendor/MagnificPopup/jquery.magnific-popup.min.js' %}"></script>
+        <script>
+            $('.gallery-lb').each(function() { // the containers for all your galleries
+                $(this).magnificPopup({
+                    delegate: 'a', // the selector for gallery item
+                    type: 'image',
+                    gallery: {
+                        enabled:true
+                    },
+                    mainClass: 'mfp-fade'
+                });
+            });
+        </script>
+        <script  src="{% static 'vendor/isotope/isotope.pkgd.min.js' %}"></script>
+        <script  src="{% static 'vendor/sweetalert/sweetalert.min.js' %}"></script>
+        <script  src="{% static 'vendor/perfect-scrollbar/perfect-scrollbar.min.js' %}"></script>
+        <script>
+            $('.js-pscroll').each(function(){
+                $(this).css('position','relative');
+                $(this).css('overflow','hidden');
+                var ps = new PerfectScrollbar(this, {
+                    wheelSpeed: 1,
+                    scrollingThreshold: 1000,
+                    wheelPropagation: false,
+                });
+    
+                $(window).on('resize', function(){
+                    ps.update();
+                })
+            });
+        </script>
+        <script  src="{% static 'js/main.js' %}"></script>
+		<!-- <script  src="{% static 'js/checkout.js' %}"></script> -->
+
+
+
+    
+    </body>
+
+
+    </html>

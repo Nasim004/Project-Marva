@@ -1,0 +1,62 @@
+<head>
+    <style>
+        @page {
+            size: a4 portrait;
+            @frame header_frame {           /* Static Frame */
+                -pdf-frame-content: header_content;
+                left: 50pt; width: 512pt; top: 50pt; height: 40pt;
+            }
+            @frame content_frame {          /* Content Frame */
+                left: 50pt; width: 512pt; top: 90pt; height: 632pt;
+            }
+            @frame footer_frame {           /* Another static Frame */
+                -pdf-frame-content: footer_content;
+                left: 50pt; width: 512pt; top: 772pt; height: 20pt;
+            }
+        }
+    </style>
+    </head>
+    
+    <body style="font:13px">
+        <!-- Content for Static Frame 'header_frame' -->
+        
+        <div id="">
+            <h3 style = "font: 30px Arial, sans-serif;">Sales Report</h3>
+
+            <hr>
+        </div>
+        
+    
+        <!-- Content for Static Frame 'footer_frame' -->
+        <div id="footer_content">(c) - page <pdf:pagenumber>
+            of <pdf:pagecount>
+        </div>
+    
+        <!-- HTML Content -->
+        
+    
+        
+    
+        <table>
+            <tr>
+                <hr>
+                <th >Order ID</th>
+                <th>Customer</th>
+                <th>Ordered Date</th>
+                <th>Amount</th>
+                <th>Payment Method</th>
+                <th>Order Status</th>   
+            </tr>
+            {% for order in order %}
+            <tr style="padding-bottom:10px;">
+                <td style="padding-left:25px;">{{order.id}}</td>
+                <td>{{order.user.last_name}}</td>
+                <td>{{order.order_date}}</td>
+                <td style="padding-left:18px;">{{order.amount}}</td>
+                <td>{{order.method}}</td>
+                <td>{{order.status}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </body>
+    </html>

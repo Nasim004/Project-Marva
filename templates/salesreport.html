@@ -1,0 +1,374 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Product Admin - Dashboard HTML Template</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js" integrity="sha512-ElRFoEQdI5Ht6kZvyzXhYG9NqjtkmlkfYk0wr6wHxU9JEHakS7UJZNeml5ALk+8IKlU6jDgMabC3vkumRokgJA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.css" integrity="sha256-aa0xaJgmK/X74WM224KMQeNQC2xYKwlAt08oZqjeF0E=" crossorigin="anonymous" />
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    
+    <link rel="stylesheet" href="{%static 'https://fonts.googleapis.com/css?family=Roboto:400,700">
+
+    <link rel="stylesheet" href="{%static 'cssadminpanel/fontawesome.min.css' %}">
+
+    <link rel="stylesheet" href="{%static 'cssadminpanel/bootstrap.min.css' %}">
+
+    <link rel="stylesheet" href="{%static 'cssadminpanel/templatemo-style.css' %}">
+
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"></script>
+
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css"  />
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css" />
+
+
+
+</head>
+
+<body id="reportsPage">
+    <div class="" id="home">
+        <nav class="navbar navbar-expand-xl">
+            <div class="container h-100">
+                <a class="navbar-brand">
+                    <h1 class="tm-site-title mb-0">Sales List</h1>
+                </a>
+                <button class="navbar-toggler ml-auto mr-0" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fas fa-bars tm-nav-icon"></i>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mx-auto h-100">
+                        <li class="nav-item">
+                            <a class="nav-link " href="/admins/adminshome">
+                                <i class="fas fa-tachometer-alt"></i>
+                                Dashboard
+                                <span class="sr-only">(current)</span>
+                            </a>
+                        </li>
+                        <!-- <li class="nav-item dropdown">
+
+                            <a class="nav-link dropdown-toggle" href="{%static '#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
+                                <i class="far fa-file-alt"></i>
+                                <span>
+                                    Reports <i class="fas fa-angle-down"></i>
+                                </span>
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#">Daily Report</a>
+                                <a class="dropdown-item" href="#">Weekly Report</a>
+                                <a class="dropdown-item" href="#">Yearly Report</a>
+                            </div>
+                        </li> -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admins/productlist">
+                                <i class="fas fa-shopping-cart"></i>
+                                Products
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admins/categorylist">
+                                <i class="fas fa-shopping-cart"></i>
+                                Category
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/cart/orderlist">
+                                <i class="fas fa-shopping-cart"></i>
+                                Orders
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " href="offerlist">
+                                <i class="fas fa-gift"></i>
+                                Offers
+                            </a>
+                        </li> 
+                   
+                   
+                      <li class="nav-item">
+                          <a class="nav-link" href="couponlist">
+                              <i class="fas fa-circle"></i>
+                              Coupons
+                          </a>
+                      </li>
+                        <li class="nav-item active">
+                            <a class="nav-link active" href="/cart/saleslist">
+                                <i class="fas fa-shopping-cart"></i>
+                                Sales
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admins/userlist">
+                                <i class="far fa-user"></i>
+                                User
+                            </a>
+                        </li>
+                        
+
+
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+
+
+<div class="container">
+
+
+    <!-- <form action="report" method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+            <div class="d-flex w-100">
+                <div class="w-50">
+                <label for="start_date">Start Date</label>
+                <input type="date" class="form-control " style="width:70%;" id="start_date" name="start_date" >
+                </div>
+                <div class="w-50">
+                <label for ="end_date">End Date</label>
+                <input type="date" class="form-control  " style="width:70%;" id="end_date" name="end_date" >
+                </div>
+            
+        </div >
+        <label class="mt-3"><p> Select Format</p></label>
+        <select name="type" class="ms-3" id ="report_type">
+            <option value="PDF">PDF</option> 
+         <option value="Excel">Excel</option> -->
+        <!-- </select>
+        
+        {% for message in messages  %}
+        <span class="text-danger">{{message}}</span>
+        {% endfor %}            
+        <button type="submit" id="generate" class="btn btn-primary mt-2 mb-1 w-100 ">Generate</button>
+        </form> -->
+
+<ul>
+
+
+
+    <div class="mt-5">
+        <h2 style="color: white;"> FILTER</h2><hr>
+    </div>
+
+
+    
+<li>
+<div class="col-md-12  rounded mt-2 pt-3">
+    <form action="date_select" method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+            <div class="d-flex w-100">
+                <div class="w-50">
+                <label for="start_date">Start Date</label>
+                <input type="date" class="form-control bg-light text-dark " style="width:70%;" id="start_date1" name="start_date" >
+                </div>
+                <div class="w-50">
+                <label for ="end_date">End Date</label>
+                <input type="date" class="form-control bg-light text-dark " style="width:70%;" id="end_date1" name="end_date" >
+                </div>
+                <button type="submit" class="btn btn-primary mt-2 mb-1 btn-sm">Filter</button>
+            
+        </div >
+        </div>
+    </div>
+        
+       
+       
+        </form>
+
+
+    </li>
+
+
+
+
+    <li>
+
+    <div class = "d-flex row"> 
+        <div class = "ml-5" style="width:75%;">
+            <form action="yearly_sales" method ="POST">
+                {% csrf_token %}
+                <label class="mt-3 text-light"><p> Select Year </p></label>
+                            <select name="year" class="" id ="months">
+                                <option value="2021">2021</option>
+                                <option value="2022">2022</option>
+                                <option value="2023">2023</option>
+                                <option value="2024">2024</option>
+                            </select>
+                    <button type="submit" class="btn btn-primary mt-2 mb-1 ml-5 btn-sm">Filter</button>
+                </form>
+        </div>
+    </div>
+
+</li>
+
+
+
+
+    <li>
+        <div class="row mr-5 mt-3">
+            <form action="monthly_sales" method ="POST">
+                {% csrf_token %}
+
+                <ul>
+
+                
+                <label class="mt-3 text-light"><p> Select Month</p></label>
+                    <select name="month" class="" id ="months">
+                        <option value="01">January</option>
+                        <option value="02">February</option>
+                        <option value="03">March</option>
+                        <option value="04">April</option>
+                        <option value="05">May</option>
+                        <option value="06">June</option>
+                        <option value="07">July</option>
+                        <option value="08">August</option>
+                        <option value="09">September</option>
+                        <option value="10">October</option>
+                        <option value="11">November</option>
+                        <option value="12">December</option>
+
+                    </select>
+                    <button type="submit" class="btn btn-primary mt-2 mb-1 btn-sm">Filter</button>
+
+
+                </ul>
+                </form>
+
+        </div>
+    </li>
+        
+    </ul>
+    </div>
+    <hr>
+
+
+
+    <!-- <table id="example" class="display nowrap" style="width:100%">
+        <thead>
+            <tr>
+                <th>Order Id</th>
+                <th>Customer</th>
+                <th>Date</th>
+                <th>Amount</th>
+                <th>Payment Method</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            {% for o in od%}
+            <tr>
+                <th scope="row">{{ o.id }}</th>
+                <th>{{o.user.last_name}}</th>
+                <th>{{o.order_date}}</th>
+                <th>{{o.amount}}</th>
+                <th>{{o.method}}</th>
+            </tr>
+        {%endfor%}
+
+    </tbody>
+</table> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <table class="table table-striped  " id="myTable">
+        <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>Customer</th> 
+                <th>Date</th>
+                <th>Amount</th>
+                <th>Payment Method</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for o in od%}
+                <tr>
+                    <th scope="row">{{ o.id }}</th>
+                    <th>{{o.user.last_name}}</th>
+                    <th>{{o.order_date}}</th>
+                    <th>{{o.amount}}</th>
+                    <th>{{o.method}}</th>
+                </tr>
+            {%endfor%}
+
+                    
+        </tbody>
+    </table>
+<script>
+    $(document).ready(function() {
+        $('#myTable').DataTable( {
+            dom: 'Bfrtip',
+            buttons: [
+                'excel', 'pdf',
+            ]
+        } );
+    } );
+</script>
+
+    <script href="{%static 'jsadminpanel/jquery-3.3.1.min.js' %}"></script>
+    <script href="{%static 'jsadminpanel/moment.min.js' %}"></script>
+    <script href="{%static 'jsadminpanel/bootstrap.min.js' %}"></script>
+    <script href="{%static 'jsadminpanel/tooplate-scripts.js' %}"></script>
+    <!-- <script>
+        Chart.defaults.global.defaultFontColor = 'white';
+        let ctxLine,
+            ctxBar,
+            ctxPie,
+            optionsLine,
+            optionsBar,
+            optionsPie,
+            configLine,
+            configBar,
+            configPie,
+            lineChart;
+        barChart, pieChart;
+        // DOM is ready
+        $(function () {
+            drawLineChart(); // Line Chart
+            drawBarChart(); // Bar Chart
+            drawPieChart(); // Pie Chart
+
+            $(window).resize(function () {
+                updateLineChart();
+                updateBarChart();                
+            });
+        })
+    </script> -->
+</body>
+
+</html>

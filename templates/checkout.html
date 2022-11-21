@@ -1,0 +1,319 @@
+
+
+
+    {%extends 'base.html'%}
+    {%load static%}
+    {%block content%}
+
+<div class = "d -flex container">
+    <div class="row my-5 ">
+        
+        <div class="col-md-9 mt-5">
+            <div class="card ">
+                <div class="card-header d-flex">
+                    <h4>Checkout</h4>
+                    <div style="margin-left:493px">
+                        <a href="addaddress" class="btn btn-outline-primary  ms-5 ">Add new address</a>
+                    </div>
+                    <div>
+
+                      
+                        <button  type="button" class="btn btn-outline-primary ml-3" data-toggle="modal" data-target="#modalcoupon">Apply Coupon</button>
+                     
+                    </div>
+                </div>
+                
+                <div class="card-body">
+                    <h5>Select Shipping Address</h5>
+                    <form action = "/cart/checkout" method="POST">
+                        {% csrf_token %}
+                        {% for add in address %}
+                        
+                        <input type="radio" id="addd" class="m-3" name="address_id" value="{{add.id}}" checked> <label>
+                            <div class="card col-md-4 my-2" style="width: 30rem;">
+                            <div class="card-body">
+                            <h5  class="card-title ">{{add.name}}</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">{{add.phone}}</h6>
+                            <br>
+                            <h6 class="card-subtitle mb-2 text-muted">{{add.address}}</h6>
+                            <h6 class="card-subtitle mb-2 text-muted">{{add.district}}</h6>
+                            <h6 class="card-subtitle mb-2 text-muted">{{add.state}}</h6>
+                            <h6 class="card-subtitle mb-2 text-muted">Landmark : {{add.landmark}}</h6>
+
+                           
+                            
+                            </div>
+                        </div></label>
+                    
+                        {% endfor %}
+
+
+                        
+
+
+
+
+
+
+
+
+
+                        <!-- <div class="d-flex">
+                        
+                            <button class="btn my-2 text-light button" type="submit" style="width:50%; background:#1C3879;">Select Address</button> 
+
+                        </div> -->
+                        <div class="mt-5">
+                            <h4 class="mtext-109 cl2 p-b-30">
+                                Payment Method:
+                            </h4>
+                                
+                              <ul>
+
+                              <li>
+
+                                <!-- <input   id="f-option" name="payment_selector"  value="Cash on delievery" > -->
+                                <button class="btn btn-warning my-2 text-dark font-italic w-25" id="btn" name="payment_selector"  value="Cash on delievery"  type="submit" style="font-size:15px ;font-weight: bolder;">Cash On Delivery</button> 
+
+                                <!-- <label for="f-option" style="color: #000000;">Cash on delivery</label> -->
+                                
+                                <div class="check"></div>
+                              </li>
+                              
+
+                                <!-- <input  id="payment" name="payment_selector" > -->
+                                
+                                <div id="paypal-button-container" class="w-25" ></div>
+
+                                <button id="rzp-button1" class="btn btn-warning w-25 font-weight-bold font-italic  text-dark" style="font-size:15px ;font-weight: bolder;"  >RazorPay</button>
+                            </ul>
+
+                        </div> 
+                    <!-- <button class="btn my-2 text-light" id="btn" type="submit" style="width:100%; background:#456ac1;">Place Order</button>  -->
+
+                    </form>
+
+                    
+                    
+                    </div>
+                </div>
+            </div>
+            
+            <div class= "col-md-3 mt-5">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Price details</h4>
+                    </div>
+                    <div class="card-body">
+                        <table class="table">
+                            <tr>
+                                <td>Subtotal</td>
+                                <td>₹{{subtotal}}</td>
+                            </tr>
+
+                            <tr>
+                              <td>Coupon Discount</td>
+                              {% if coupon.is_active == True %}
+                              <td>₹{{coupon.discount_amount}}</td>
+                              {%else%}
+                              <td>₹0</td>
+                              {%endif%}
+
+
+                            </tr>
+                            <tr>
+                                <td>Total</td>
+                                <td>₹{{total}}</td>
+                            </tr>
+                            
+                        </table>
+                        </div><br>
+                    </div>
+                </div>
+        </div> 
+    </div>
+</div>
+
+<div class="modal fade" id="modalcoupon" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="left: 0%;top: 30%;">
+  <div class="modal-dialog" role="document">
+    <form action="checkout" method="POST">
+      {%csrf_token%}
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Apply Coupon</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <label data-error="wrong" data-success="right" for="defaultForm-email">Enter Coupon Code</label>
+        <input type="text" id="defaultForm-email" name="code" class="form-control validate">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        
+        <button type="submit" class="btn btn-primary">Confirm</button>
+        
+      </div>
+    </div>
+  </form>
+  </div>
+</div>
+
+
+
+<script src="https://www.paypal.com/sdk/js?client-id=AdwSNR7_CW8jmZG2YKrcuSoFHPMq9CqARadnEo5J_ix0Wc0_mLeg3mcBxpzBzoEjRGWT-TndpdU5lSgf&currency=USD&disable-funding=card"></script>
+<script>
+
+
+
+
+    var total='{{total}}'
+
+    paypal.Buttons({
+      //onclick: function(data, actions) {
+       // return actions.resolve();
+        
+      //},
+      // Sets up the transaction when a payment button is clicked
+      createOrder: (data, actions) => {
+        return actions.order.create({
+          purchase_units: [{
+            amount: {
+              value: total // Can also reference a variable or function
+            }
+          }]
+        });
+      },
+      // Finalize the transaction after payer approval
+      onApprove: (data, actions) => {
+        return actions.order.capture().then(function(orderData) {
+          console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+          
+
+          //var amount = $('#grand_total').val()
+          //var cart = $('#cart').val()
+          var address = $('#addd').val()
+          var payment = "PayPal"
+          var token = $("input[name='csrfmiddlewaretoken']").val()
+          $.ajax({
+            url: "/cart/checkout",
+            type: "POST",
+            data: {
+              'csrfmiddlewaretoken': token,
+              //'amount': amount,
+              //'cart': cart,
+              'address_id': address,
+              'payment_selector': payment,
+            },
+            success: function(response) {
+              console.log(response)
+              
+                swal({
+                  title: "Payment Successful",
+                  text: "Your payment is successful",
+                  icon: "success",
+                  button: "OK",
+                }).then(function() {
+                  window.location.href = "orderplaced";
+                });
+             
+            }
+          })
+        });
+      }
+    }).render('#paypal-button-container');
+      
+      function alreadyApplied(){
+          swal("Already Applied", "You have already applied the code", "error");
+      }
+    </script>
+
+<!-- razorpay script -->
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+<script>
+  var totalprice = '{{total}}'
+  $(document).ready(function() {
+    $('#rzp-button1').click(function (e) { 
+      var address = $('#addd').val()
+      var payment = "Razorpay"
+      var token = $("input[name='csrfmiddlewaretoken']").val()
+      e.preventDefault();
+      console.log("innnn")
+      $.ajax({
+            type: "GET",
+            url: "razorpay",
+            success: function (response) {
+                var options={
+                    "key": "rzp_test_xn7GLnYrhQV1kd", // Enter the Key ID generated from the Dashboard
+                    "amount": totalprice*100,//response.total, // Amount is int currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+                    "currency": "INR",
+                    "name": "cart",
+                    "description": "Thank you for shopping with us",
+                     "image": "https://example.com/your_logo", 
+                    // "order_id": response.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+                    "handler": function (response){
+                        // alert(response.razorpay_payment_id);
+                        data = {
+                            "id": response.razorpay_payment_id,
+                            "address_id" : address,
+                            "payment_selector" : payment,
+                            'csrfmiddlewaretoken': token
+                        }
+                        $.ajax({
+                            type: "POST",
+                            url: "/cart/checkout",
+                            data: data,
+                            success: function(response) {
+                              console.log(response)
+                              
+                                swal({
+                                  title: "Payment Successful",
+                                  text: "Your payment is successful",
+                                  icon: "success",
+                                  button: "OK",
+                                }).then(function() {
+                                  window.location.href = "orderplaced";
+                                });
+                             
+                            }
+                        });
+                    },
+                    "prefill": {
+                        "name": "User",
+                        "email": "user@gmail.com",
+                        "contact": "9999999999",
+                    },
+                    "notes": {
+                        "address": "Razorpay Corporate Office"
+                    },
+                    "theme": {
+                        "color": "#3399cc"
+                    },
+                };
+                var rzp1 = new Razorpay(options);
+                rzp1.open();
+            }
+        });
+    });
+});
+</script>
+
+
+
+  {% if messages %}
+				{% for message in messages %}
+				<script>
+					swal('{{message}}')
+				</script>
+				{% endfor %}
+	{% endif %}
+
+
+
+
+
+
+
+{%endblock%}

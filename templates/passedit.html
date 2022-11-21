@@ -1,0 +1,52 @@
+{%extends 'base.html'%}
+{%load static%}
+{%block content%}
+
+
+
+
+
+<div class="container mt-5">
+   
+        
+    <div class="col-md-8  mx-auto" style="width:60%;margin-top:80px;">
+        <div class="card">
+            <div class="card-header">
+                <h4>Change Password</h4>
+            </div>
+            <div class="card-body ">
+                <form action="/admins/change_password" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="name">Current Password</label>
+                        <input type="password" class="form-control" name="old"  id="first_name"  placeholder="Enter current password">
+                    </div>
+                    <div class="form-group">
+                        <label for="name">New Password</label>
+                        <input type="password" class="form-control" name="new"  id="last_name"  placeholder="Enter new password" >
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Confirm New Password</label>
+                        <input type="password" class="form-control" name="confirm" id="phone" placeholder="Enter new password again">
+                    </div>
+                    <span id="validate" class="text-danger"> </span>
+                    <button class="btn my-2 text-light" id="btn" type="submit" style="width:100%; background:#1C3879;">Change Password</button> 
+                </form> 
+                <div>
+
+                    {% if messages %}
+                    {% for message in messages %}
+                    <script>
+                        swal('{{message}}')
+                    </script>
+                    {% endfor %}
+                    {% endif %}
+                    
+                </div>
+            </div>
+        </div>      
+    </div>
+</div>
+
+
+{%endblock%}

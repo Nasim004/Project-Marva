@@ -1,0 +1,95 @@
+{%extends 'base.html'%}
+{%load static%}
+{%block content%}
+
+
+
+
+
+<div class="row ml-3" >
+  {% for o in cart1 %}
+  <!-- <div class="col-sm-3"> -->
+      <div class="card" style="width: 20rem;margin-top: 85px;margin-left:20px;margin-bottom: 15px;">
+        <img class="card-img-top" src="{{o.product.img.url}}" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title" >{{o.product.product_name}}</h5>
+          <p class="card-text">{{o.product.des}}</p>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">Price : {{o.product.price}} </li>
+          <li class="list-group-item">Status :{{o.order.status}} </li>
+          <li class="list-group-item">Quantity :{{o.quantity}} </li>
+          <li class="list-group-item">Date :{{o.order.order_date}} </li>
+          <li class="list-group-item">Method :{{o.order.method}} </li>
+
+
+        </ul>
+
+        {% if o.order.status != 'Cancelled' and o.oder.status == 'conifrm' %}
+        <div class="card-body">
+
+          <a href="/cart/invoice/{{o.order_id}}" target="_blank">
+            <button type="button" class="btn btn-success">Invoice</button>
+          </a>
+
+
+          <a href="/cart/ordercancel/{{o.order_id}}">
+            <button type="button" class="btn btn-danger">Cancel</button>
+        </a>
+        
+        </div>
+        {%elif o.order.status == 'Cancelled' %}
+        <div class="card-body">
+          <div class="text-center">
+          
+            <button  class="btn btn-success">Cancelled Successfully</button>
+
+          </div>
+        
+        </div>
+
+        {%elif o.order.status == 'Delivered' %}
+
+
+        
+        <div class="card-body col">
+          
+          <div class="text-center">
+            <p  style="color: green ;font-family:'Times New Roman', Times, serif ;font-size: medium;font-weight:600;">Delivered Successfully</p>
+
+            <a href="/cart/invoice/{{o.order_id}}" target="_blank">
+              <button type="button" class="btn btn-success m-3 ">Invoice</button>
+            </a>  
+
+
+            <a href="/cart/orderreturn/{{o.order_id}}">
+              <button type="button" class="btn btn-danger  ">Return</button>
+
+          </a>
+        </div>
+
+        </div>
+
+
+        {%else%}
+        <div class="text-center">
+          <a href="/cart/invoice/{{o.order_id}}" target="_blank">
+            <button type="button" class="btn btn-success m-3 ">Invoice</button>
+          </a>
+  
+
+        </div>
+
+
+
+        {%endif%}
+      </div>
+    <!-- </div> -->
+
+  {% endfor %}
+
+
+</div>
+
+
+{%endblock%}

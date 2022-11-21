@@ -1,0 +1,594 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>MARVA</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	<link rel="icon" type="image/png"  href="{% static 'images/icons/favicon.png' %}"/>
+	<link rel="stylesheet" type="text/css"  href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}">
+	<link rel="stylesheet" type="text/css"  href="{% static 'fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+	<link rel="stylesheet" type="text/css"  href="{% static 'fonts/iconic/css/material-design-iconic-font.min.css' %}">
+	<link rel="stylesheet" type="text/css"  href="{% static 'fonts/linearicons-v1.0.0/icon-font.min.css' %}">
+	<link rel="stylesheet" type="text/css"  href="{% static 'vendor/animate/animate.css' %}">
+
+	<link rel="stylesheet" type="text/css"  href="{% static 'vendor/css-hamburgers/hamburgers.min.css' %}">
+
+	<link rel="stylesheet" type="text/css"  href="{% static 'vendor/animsition/css/animsition.min.css' %}">
+
+	<link rel="stylesheet" type="text/css"  href="{% static 'vendor/select2/select2.min.css' %}">
+
+	<link rel="stylesheet" type="text/css"  href="{% static 'vendor/daterangepicker/daterangepicker.css' %}">
+
+	<link rel="stylesheet" type="text/css"  href="{% static 'vendor/slick/slick.css' %}">
+
+	<link rel="stylesheet" type="text/css"  href="{% static 'vendor/MagnificPopup/magnific-popup.css' %}">
+
+	<link rel="stylesheet" type="text/css"  href="{% static 'vendor/perfect-scrollbar/perfect-scrollbar.css' %}">
+
+	<link rel="stylesheet" type="text/css"  href="{% static 'css/util.css' %}">
+	<link rel="stylesheet" type="text/css"  href="{% static 'css/main.css' %}">
+
+</head>
+
+<style>
+
+	*{
+		color: black;
+	}
+	.card-style1 {
+		box-shadow: 0px 0px 10px 0px rgb(89 75 128 / 9%);
+	}
+	.border-0 {
+		border: 0!important;
+	}
+	.card {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		min-width: 0;
+		word-wrap: break-word;
+		background-color: #fff;
+		background-clip: border-box;
+		border: 1px solid rgba(0,0,0,.125);
+		border-radius: 0.25rem;
+	}
+	
+	section {
+		padding: 120px 0;
+		overflow: hidden;
+		background: #fff;
+	}
+	.mb-2-3, .my-2-3 {
+		margin-bottom: 2.3rem;
+	}
+	
+	.section-title {
+		font-weight: 600;
+		letter-spacing: 2px;
+		text-transform: uppercase;
+		margin-bottom: 10px;
+		position: relative;
+		display: inline-block;
+	}
+	.text-primary {
+		color: #ceaa4d !important;
+	}
+	.text-secondary {
+		color: #15395A !important;
+	}
+	.font-weight-600 {
+		font-weight: 600;
+	}
+	.display-26 {
+		font-size: 15px;
+	}
+	
+	@media screen and (min-width: 992px){
+		.p-lg-7 {
+			padding: 4rem;
+		}
+	}
+	@media screen and (min-width: 768px){
+		.p-md-6 {
+			padding: 3.5rem;
+		}
+	}
+	@media screen and (min-width: 576px){
+		.p-sm-2-3 {
+			padding: 2.3rem;
+		}
+	}
+	.p-1-9 {
+		padding: 1.9rem;
+	}
+	
+	.bg-secondary {
+		background: #15395A !important;
+	}
+	@media screen and (min-width: 576px){
+		.pe-sm-6, .px-sm-6 {
+			padding-right: 3.5rem;
+		}
+	}
+	@media screen and (min-width: 576px){
+		.ps-sm-6, .px-sm-6 {
+			padding-left: 3.5rem;
+		}
+	}
+	.pe-1-9, .px-1-9 {
+		padding-right: 1.9rem;
+	}
+	.ps-1-9, .px-1-9 {
+		padding-left: 1.9rem;
+	}
+	.pb-1-9, .py-1-9 {
+		padding-bottom: 1.9rem;
+	}
+	.pt-1-9, .py-1-9 {
+		padding-top: 1.9rem;
+	}
+	.mb-1-9, .my-1-9 {
+		margin-bottom: 1.9rem;
+	}
+	@media (min-width: 992px){
+		.d-lg-inline-block {
+			display: inline-block!important;
+		}
+	}
+	.rounded {
+		border-radius: 0.25rem!important;
+	}
+</style>
+
+
+
+
+
+
+<body class="animsition">
+	
+	<!-- Header -->
+	<header >
+		<!-- Header desktop -->
+		<div class="container-menu-desktop" >
+			<!-- Topbar -->
+			<div class="top-bar">
+				<div class="content-topbar flex-sb-m h-full container">
+					<div class="left-top-bar">
+
+						{%if user.is_authenticated %}
+							Hi <span style="font-weight: bold ; color:#fddf49" >{{user.first_name}}</span> welcome to MARVA Gold
+						{%else%}
+							Hi !! welcome to MARVA Gold
+						{%endif%}
+
+					</div>
+
+					<div class="right-top-bar flex-w h-full">
+						<!-- <a  href="{% static '#" class="flex-c-m trans-04 p-lr-25">
+							Help & FAQs
+						</a> -->
+						
+
+						{% if user.is_authenticated %}
+
+							<a  href="/accounts/logout" class="flex-c-m trans-04 p-lr-25">
+								Logout
+							</a>
+						
+						{%else%}	
+
+							<a  href="/accounts/login" class="flex-c-m trans-04 p-lr-25">
+								Sign in
+							</a>
+
+							<a  href="/accounts/register" class="flex-c-m trans-04 p-lr-25">
+								Sign up
+							</a>
+						{%endif%}	
+
+
+
+					</div>
+				</div>
+			</div>
+
+			<div class="wrap-menu-desktop">
+				<nav class="limiter-menu-desktop container">
+					
+					<!-- Logo desktop -->		
+					<a  href="/" class="logo">
+						<p style="color: black;font-weight:900;font-size:35px">MARVA</p>
+						<!-- <img  src="{% static 'images/icons/logo-01.png' %}" alt="IMG-LOGO"> -->
+					</a>
+
+					<!-- Menu desktop -->
+					<div class="menu-desktop">
+						<ul class="main-menu">
+							<li class="active-menu">
+								<a  href="{% static '#" style="color: black;">My Account</a>
+								<ul class="sub-menu">
+									<li><a  href="{% static '#">Hello User</a></li>
+									<li><a  href="{% static '#">Orders</a></li>
+									<li><a  href="{% static '#">Wishlist</a></li>
+									
+
+								</ul>
+							</li>
+
+                            <li>
+								<a  href="/admins/product/4">Necklace</a>
+							</li>
+                            <li>
+								<a  href="/admins/product/8">Rings</a>
+							</li>
+                            <li>
+								<a  href="/admins/product/14">Bangles</a>
+							</li>
+                            <li>
+								<a  href="/admins/product/15">Earrings</a>
+							</li>
+							<!-- {% for c in category %}
+
+							<li>
+								<a  href="/admins/product/{{c.id}}">{{c.category_name}}</a>
+							</li>
+							
+							{% endfor %} -->
+
+
+							<li>
+								<a  href="#">Contact</a>
+							</li>
+
+
+
+						</ul>
+					</div>	
+
+					<!-- Icon header -->
+					<div class="wrap-icon-header flex-w flex-r-m ">
+						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-modal-search">
+							<i class="zmdi zmdi-search"></i>
+						</div>
+
+
+						<a  href="{% static '#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 " >
+							<i class="zmdi zmdi-favorite-outline"></i>
+						</a>
+
+						<!-- <a  href="{% static '#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti" data-notify="3">
+							<i class="zmdi zmdi-favorite-outline"></i>
+						</a> -->
+
+						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11  js-show-cart" >
+							<i class="zmdi zmdi-shopping-cart"></i>
+						</div>
+					</div>
+				</nav>
+			</div>	
+		</div>
+
+		<!-- Header Mobile -->
+		<div class="wrap-header-mobile">
+			<!-- Logo moblie -->		
+			<div class="logo-mobile">
+				<a  href="{% static '#" class="logo">
+					<p style="color: black;font-weight:900;font-size:35px">MARVA</p>
+				</a>
+			</div>
+
+			<!-- Icon header -->
+			<div class="wrap-icon-header flex-w flex-r-m m-r-15">
+				<div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 js-show-modal-search">
+					<i class="zmdi zmdi-search"></i>
+				</div>
+
+				<div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart" data-notify="2">
+					<i class="zmdi zmdi-shopping-cart"></i>
+				</div>
+
+				<a  href="{% static '#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti" data-notify="0">
+					<i class="zmdi zmdi-favorite-outline"></i>
+				</a>
+			</div>
+
+			<!-- Button show menu -->
+			<div class="btn-show-menu-mobile hamburger hamburger--squeeze">
+				<span class="hamburger-box">
+					<span class="hamburger-inner"></span>
+				</span>
+			</div>
+		</div>
+
+
+		<!-- Menu Mobile -->
+		<div class="menu-mobile">
+			<ul class="topbar-mobile">
+				<li>
+					<div class="left-top-bar">
+						Hi {{user.first_name}} !! welcome to MARVA Gold
+					</div>
+				</li>
+
+				<li>
+					{% if user.is_authenticated %}
+
+					<a  href="/accounts/logout" class="flex-c-m trans-04 p-lr-25">
+						Logout
+					</a>
+				
+				{%else%}	
+
+					<a  href="/accounts/login" class="flex-c-m trans-04 p-lr-25">
+						Sign in
+					</a>
+
+					<a  href="/accounts/register" class="flex-c-m trans-04 p-lr-25">
+						Sign up
+					</a>
+				{%endif%}	
+				</li>
+			</ul>
+
+			<ul class="main-menu-m">
+				<li>
+					<a  href="{% static '#">Categories</a>
+					<ul class="sub-menu-m">
+						<li><a  href="{% static '#">Hello User</a></li>
+						<li><a  href="{% static '#">Orders</a></li>
+						<li><a  href="{% static '#">Wishlist</a></li>
+
+					</ul>
+					<span class="arrow-main-menu-m">
+						<i class="fa fa-angle-right" aria-hidden="true"></i>
+					</span>
+				</li>
+
+                {%for cat in category %}
+
+				<li>
+					<a  href="product">{{cat.category_name}}</a>
+				</li>
+
+                {% endfor %}
+
+			</ul>
+		</div>
+
+
+
+
+
+
+
+
+
+		<section class="bg-light">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12 mb-4 mb-sm-5">
+						<div class="card card-style1 border-0">
+							<div class="card-body p-1-9 p-sm-2-3 p-md-6 p-lg-7">
+								<div class="row align-items-center">
+									<div class="col-lg-6 mb-4 mb-lg-0">
+										<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/2048px-User-avatar.svg.png" style="height: 300px;width:300px;" alt="...">
+									</div>
+									<div class="col-lg-6 px-xl-10">
+										<!-- <div class="bg-secondary d-lg-inline-block py-1-9 px-1-9 px-sm-6 mb-1-9 rounded">
+											<h3 class="h2 text-white mb-0">{{details.First_name}} {{details.last_name}} </h3>
+										</div> -->
+										<ul class="list-unstyled mb-1-9">
+											<li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">First_name: </span>{{details.First_name}}</li>
+											<li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Last_name: </span>{{details.last_name}}</li>
+											<li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Email: </span>{{details.email}}</li>
+											<li class="display-28"><span class="display-26 text-secondary me-2 font-weight-600">Phone:</span> {{details.phone_number}}</li>
+											<div style="margin-left:50px;margin-bottom:30px;margin-top:20px">
+												<a href="/admins/user_edit/{{user.id}}" class="btn btn-outline-primary btn-sm ms-5 ">Edit Profile</a>
+										
+											
+												<a href="/admins/change_password" class="btn btn-outline-primary btn-sm ms-5 ">Change Password</a>
+											</div>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div style="margin-left:50px;margin-bottom:30px">
+				<a href="/cart/addaddress1" class="btn btn-outline-primary btn-sm ms-5 ">Add new address</a>
+			</div>
+			
+			<div class="row">
+				{% for addres in addres %}
+
+				<div class="col-sm-3 ml-5	">
+				  <div class="card">
+					<div class="card-body">
+					  <h5 class="card-title"><span style="font-weight: bold;color:black">{{addres.type}} Address</span></h5>
+					  <p class="card-text"><span style="font-weight: bold;color:black">Name : </span> {{addres.name}}</p>
+					  <p class="card-text"><span style="font-weight: bold;color:black">Address : </span> {{addres.address}}</p>
+					  <p class="card-text"><span style="font-weight: bold;color:black">Pincode : </span> {{addres.postcode}}</p>
+					  <p class="card-text"><span style="font-weight: bold;color:black">District : </span> {{addres.district}}</p>
+					  <p class="card-text"><span style="font-weight: bold;color:black">State : </span> {{addres.state}}</p>
+					  <p class="card-text"><span style="font-weight: bold;color:black">Landmark : </span> {{addres.landmark}}</p>
+					  <br>
+
+
+					  <a href="address_edit/{{addres.id}}" class="btn btn-primary">Edit </a>
+					  <a href="add_delete/{{addres.id}} "  data-toggle="modal" data-target="#exampleModal4{{addres.id}}" class="btn btn-primary">Delete</a>
+					</div>
+				  </div>
+				</div>
+
+				<div class="modal fade" id="exampleModal4{{addres.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="left: 0%;top: 30%;">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">Delete Address</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                        Are you want to delete <span style="font-weight: bold ;">{{addres.type}} Address </span>?
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          <a href="add_delete/{{addres.id}}">
+                          <button type="button" class="btn btn-primary">Delete</button>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+				{% endfor %}
+			  </div>
+
+
+			<!-- <div class=" m-3 col-md-12">
+				<h5 class="fw-bold">Addresses</h5>
+				
+				<div class="row">
+					{% for address in address %}
+					<div class = "col-md-4 my-1">
+						<div class="card" style="width: 18rem;">
+							<div class="card-body">
+							  <h5 class="card-title">{{address.name}}</h5>
+							  <h6 class="card-subtitle mb-2 text-muted">{{address.phone}}</h6>
+							  <p class="card-text">{{address.address}}<br>
+								{{address.city}}<br>
+								{{address.pincode}}<br>
+								{{address.state}}<br>
+							  </p>
+							  <button class="btn btn-danger"  onclick="deleteAddress({{address.id}})" class="card-link">Delete</button>
+							  {% comment %} <a href="#" class="card-link">Another link</a> {% endcomment %}
+							</div>
+						  </div>
+					</div>
+					{% endfor %}
+				</div> -->
+
+				{% if messages %}
+
+				{% for message in messages %}
+				<script>
+					swal('{{message}}')
+				</script>
+				{% endfor %}
+				{% endif %} 
+				
+
+
+
+
+
+
+
+		</section>
+
+
+
+
+
+
+
+
+        <script  src="{% static 'vendor/jquery/jquery-3.2.1.min.js' %}"></script>
+        <script  src="{% static 'vendor/animsition/js/animsition.min.js' %}"></script>
+        <script  src="{% static 'vendor/bootstrap/js/popper.js' %}"></script>
+        <script  src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+        <script  src="{% static 'vendor/select2/select2.min.js' %}"></script>
+        <script>
+            $(".js-select2").each(function(){
+                $(this).select2({
+                    minimumResultsForSearch: 20,
+                    dropdownParent: $(this).next('.dropDownSelect2')
+                });
+            })
+        </script>
+        <script  src="{% static 'vendor/daterangepicker/moment.min.js' %}"></script>
+        <script  src="{% static 'vendor/daterangepicker/daterangepicker.js' %}"></script>
+        <script  src="{% static 'vendor/slick/slick.min.js' %}"></script>
+        <script  src="{% static 'js/slick-custom.js' %}"></script>
+        <script  src="{% static 'vendor/parallax100/parallax100.js' %}"></script>
+        <script>
+            $('.parallax100').parallax100();
+        </script>
+        <script  src="{% static 'vendor/MagnificPopup/jquery.magnific-popup.min.js' %}"></script>
+        <script>
+            $('.gallery-lb').each(function() { // the containers for all your galleries
+                $(this).magnificPopup({
+                    delegate: 'a', // the selector for gallery item
+                    type: 'image',
+                    gallery: {
+                        enabled:true
+                    },
+                    mainClass: 'mfp-fade'
+                });
+            });
+        </script>
+        <script  src="{% static 'vendor/isotope/isotope.pkgd.min.js' %}"></script>
+        <script  src="{% static 'vendor/sweetalert/sweetalert.min.js' %}"></script>
+        <script>
+            $('.js-addwish-b2').on('click', function(e){
+                e.preventDefault();
+            });
+    
+            $('.js-addwish-b2').each(function(){
+                var nameProduct = $(this).parent().parent().find('.js-name-b2').html();
+                $(this).on('click', function(){
+                    swal(nameProduct, "is added to wishlist !", "success");
+    
+                    $(this).addClass('js-addedwish-b2');
+                    $(this).off('click');
+                });
+            });
+    
+            $('.js-addwish-detail').each(function(){
+                var nameProduct = $(this).parent().parent().parent().find('.js-name-detail').html();
+    
+                $(this).on('click', function(){
+                    swal(nameProduct, "is added to wishlist !", "success");
+    
+                    $(this).addClass('js-addedwish-detail');
+                    $(this).off('click');
+                });
+            });
+    
+            /*---------------------------------------------*/
+    
+            $('.js-addcart-detail').each(function(){
+                var nameProduct = $(this).parent().parent().parent().parent().find('.js-name-detail').html();
+                $(this).on('click', function(){
+                    swal(nameProduct, "is added to cart !", "success");
+                });
+            });
+        
+        </script>
+        <script  src="{% static 'vendor/perfect-scrollbar/perfect-scrollbar.min.js' %}"></script>
+        <script>
+            $('.js-pscroll').each(function(){
+                $(this).css('position','relative');
+                $(this).css('overflow','hidden');
+                var ps = new PerfectScrollbar(this, {
+                    wheelSpeed: 1,
+                    scrollingThreshold: 1000,
+                    wheelPropagation: false,
+                });
+    
+                $(window).on('resize', function(){
+                    ps.update();
+                })
+            });
+        </script>
+        <script  src="{% static 'js/main.js' %}"></script>
+    
+    </body>
+    </html>

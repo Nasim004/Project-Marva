@@ -1,0 +1,52 @@
+{%extends 'base.html'%}
+{%load static%}
+{%block content%}
+
+
+
+
+
+<div class="container mt-5">
+   
+        
+    <div class="col-md-8  mx-auto" style="width:60%;margin-top:80px;">
+        <div class="card">
+            <div class="card-header">
+                <h4>Edit Profile</h4>
+            </div>
+            <div class="card-body ">
+                <form action="/admins/user_edit/{{user.id}}" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control" name="first_name"  id="first_name"  placeholder="Enter your first_name" value="{{user.First_name}}">
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control" name="last_name"  id="last_name"  placeholder="Enter your last_name" value="{{user.last_name}}">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone</label>
+                        <input type="text" class="form-control" name="phone" id="phone" placeholder="Enter your phone with +91" value="{{user.phone_number}}">
+                    </div>
+                    <div class="form-group">
+                        <label for="address">email</label>
+                        <input type="email" class="form-control" name="email" id="address" placeholder="Enter your address" value="{{user.email}}">
+                    </div>
+                    <span id="validate" class="text-danger"> </span>
+                    <button class="btn my-2 text-light" id="btn" type="submit" style="width:100%; background:#1C3879;">Edit Profile</button> 
+                </form> 
+                
+
+
+                    
+            
+            </div>
+        </div>      
+    </div>
+</div>
+
+
+
+
+{%endblock%}

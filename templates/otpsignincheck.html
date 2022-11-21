@@ -1,0 +1,179 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Otp Page</title>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script type="text/javascript">
+    var jQuery_1_7_1 = $.noConflict(true);
+    </script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+</head>
+<style>
+    .card {
+        width: 350px;
+        padding: 10px;
+        border-radius: 20px;
+        background: #fff;
+        border: none;
+        height: 350px;
+        position: relative;
+      }
+      
+      .container {
+        height: 100vh;
+      }
+      
+      body {
+        background: #eee;
+      }
+      
+      .mobile-text {
+        color: #989696b8;
+        font-size: 15px;
+      }
+      
+      .form-control {
+        margin-right: 12px;
+      }
+      
+      .form-control:focus {
+        color: #495057;
+        background-color: #fff;
+        border-color: #ff8880;
+        outline: 0;
+        box-shadow: none;
+      }
+      
+      .cursor {
+        cursor: pointer;
+      }
+      .form-submit {
+        color: red;
+        background: none;
+        border: none;
+      }
+      .form-submit:hover{
+          cursor: pointer;
+        }
+
+      
+      .numberplate{
+        border: none;
+        border-bottom-style: solid;
+        padding-left: 10px;
+        border-color: rgb(214, 119, 119);
+
+
+      }
+
+      .flex-row{
+        margin-left: 55px;
+
+      }
+
+      input:focus{
+        outline: none;
+    }
+
+
+
+</style>
+
+
+
+<body>
+  
+  <div class="d-flex justify-content-center align-items-center flex-column container">
+    <form action="otp_validate_reg" method="post">
+      {%csrf_token%}
+      <div class="card py-5 px-3">
+          <h5 class="m-0">OTP Verification</h5>
+          <div class="d-flex flex-row mt-5    ">
+              <input type="hidden" name="email" value="{{email}}">
+              <input type="hidden" name="first_name" value="{{first_name}}">
+              <input type="hidden" name="last_name" value="{{last_name}}">
+              <input type="hidden" name="phone_number" value="{{phone_number}}">
+              <input type="hidden" name="password" value="{{password}}">
+
+              <input type="text" name="otp" class="numberplate"  id="otp" onkeyup="validatePhonenumber()" placeholder="Enter the OTP"/>
+          </div>
+          <small id="phonenumber-error" class="text-center m-t-100" ></small>
+          
+          <div class="text-center mt-5">
+              <input type="submit"   id="signin" class="form-submit" value="Log in"  />
+          </div>
+      </div>
+ 
+</form>
+<div>
+  <a href="signup_resend">
+
+    <button  id="btnCounter" disabled>Time left:<span id="count"></span><br>Resend OTP</button>
+
+  </a>
+</div>
+
+</div>
+
+
+<script>
+  var phonenumberError = document.getElementById('phonenumber-error');
+  
+  function validatePhonenumber(){
+    var phonenumber = document.getElementById('otp').value.trim();
+    var num = phonenumber.replace(/[^\d]/g, '');
+    console.log(num)
+    
+    if (num.length==0) {
+      phonenumberError.innerHTML='Otp is Required';
+      phonenumberError.style.color='red'
+      return false;
+    }
+    
+    
+    phonenumberError.innerHTML='Otp is valid';
+    phonenumberError.style.color='green'
+    return true; 
+    
+  }
+  jQuery_1_7_1(document).on("submit", "form", function (e) {
+            
+            
+    if (validatePhonenumber()) {
+       
+    } else {
+        e.preventDefault();
+        swal('Invalid data! Ensure You have entered correct data');
+        return true;
+    }
+});
+
+</script>
+<script>
+  // Get refreence to span and button
+var spn = document.getElementById("count");
+var btn = document.getElementById("btnCounter");
+
+var count = 15;     // Set count
+var timer = null;  // For referencing the timer
+
+(function countDown(){
+  // Display counter and start counting down
+  spn.textContent = count;
+  
+  // Run the function again every second if the count is not zero
+  if(count !== 0){
+    timer = setTimeout(countDown, 1000);
+    count--; // decrease the timer
+  } else {
+    // Enable the button
+    btn.removeAttribute("disabled");
+  }
+}());
+</script>
+
+</body>
+</html>

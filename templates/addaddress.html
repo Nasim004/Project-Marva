@@ -1,0 +1,285 @@
+{%extends 'base.html'%}
+{%load static%}
+{%block content%}
+
+
+
+
+
+<div class="container mt-5">
+   
+        
+    <div class="col-md-8  mx-auto" style="width:60%;margin-top:80px;">
+        <div class="card">
+            <div class="card-header">
+                <h4>Add Address</h4>
+            </div>
+            <div class="card-body ">
+                <form action="addaddress" method="POST">
+                    {% csrf_token %}
+
+
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control" name="name" id="name"  onkeyup="validateName()" placeholder="Enter your name">
+                    </div>
+                    <small id="name-error" ></small>
+                   
+
+                    <div class="form-group">
+                        <label for="phone">Phone</label>
+                        <input type="text" class="form-control" name="phone" id="phone"   placeholder="Enter your phone" onkeyup="validatePhone()" >
+                    </div>
+                    <small id="phone-error" ></small>
+
+					
+
+
+                    <div class="form-group">
+                        <label for="address">Address</label>
+                        <input type="text" class="form-control" name="add" id="address" onkeyup="validateAddress()" placeholder="Enter your address" >
+                    </div>
+                    <small id="address-error" ></small>
+                   
+
+                    <div class="form-group">
+                        <label for="city">District</label>
+                        <input type="text" class="form-control" name="district" id="distirct"  onkeyup="validateCity()" placeholder="Enter your district">
+                    </div>
+                    <small id="city-error" ></small>
+
+
+                    <div class="form-group">
+                        <label for="state">State</label>
+                        <input type="text" class="form-control" name="state" id="state" onkeyup="validateState()" placeholder="Enter your state">
+                    </div>
+                    <small id="state-error" ></small>
+
+
+                    <div class="form-group">
+                        <label for="pincode">Landmark</label>
+                        <input type="text" class="form-control" name="landmark" id="landmark" onkeyup="validateLandmark()" placeholder="Enter Landmark ">
+                    </div>
+                    <small id="landmark-error"></small>
+
+
+                    <div class="form-group">
+                        <label for="pincode">Pincode</label>
+                        <input type="text" class="form-control" name="postcode" id="postcode" onkeyup="validatePincode()" placeholder="Enter your pincode" >
+                    </div>
+                    <small id="pincode-error" ></small>
+
+
+
+                    <div class="form-group">
+                        <label for="pincode">Type</label>
+                        <input type="text" class="form-control" name="type" id="type" onkeyup="validateType()" placeholder="Home/Work etc..">
+                    </div>
+                    <small id="type-error" ></small>
+
+
+                    <span id="validate" class="text-danger"> </span>
+                    <button class="btn my-2 text-light" id="btn" type="submit" style="width:100%; background:#1C3879;">Add Address</button> 
+                </form> 
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    var nameError = document.getElementById('name-error');
+    var phoneError = document.getElementById('phone-error');
+    var addressError = document.getElementById('address-error');
+    var cityError = document.getElementById('city-error');
+    var stateError = document.getElementById('state-error');
+    var pincodeError = document.getElementById('pincode-error');
+    var landmarkError = document.getElementById('landmark-error');
+    var typeError = document.getElementById('type-error');
+
+
+
+
+
+
+    function validateName() {
+        var name=document.getElementById('name').value.trim();  
+        var Required=4;
+        var left=Required - name.length;
+        if (name.length==0) {
+            nameError.innerHTML=' Name is Required';
+            nameError.style.color='red'
+            return false;
+            }
+        
+        if (left>0){
+            
+            nameError.innerHTML =left+ 'more character Required';
+            nameError.style.color='red'
+            return false;
+        
+        }
+            nameError.innerHTML='Name is valid';
+            nameError.style.color='white'
+            return true;
+        }
+
+
+
+
+
+    function validatePhone() {
+            var phone=document.getElementById('phone').value.trim();  
+        
+            if (phone.length==0) {
+                phoneError.innerHTML='Phone number is Required';
+                phoneError.style.color='red'
+                return false;
+                }
+            if (!/^[0-9]+$/.test(phone)) {
+                    phoneError.innerHTML = "Phone number must be digits"
+                    phoneError.style.color='red'
+                    return false;
+            }
+  
+        
+            
+        
+            phoneError.innerHTML='Phone number is valid';
+            phoneError.style.color='white'
+            return true;
+            }    
+
+
+    function validateAddress() {
+                var address =document.getElementById('address').value.trim();
+                var Required=6;
+                var left=Required - address.length;
+            
+                if(left>0){
+                    addressError.innerHTML =left + ' more character Required';
+                    addressError.style.color='red'
+                    return false;
+            
+                    }
+                    addressError.innerHTML='Address is valid';
+                    addressError.style.color='white'
+                    return true;
+            
+            } 
+
+    function validateCity() {
+                var city=document.getElementById('distirct').value.trim();  
+            
+                if (city.length==0) {
+                    cityError.innerHTML='District is Required';
+                    cityError.style.color='red'
+                    return false;
+                    }
+                    cityError.innerHTML='City is valid';
+                    cityError.style.color='white'
+                    return true;
+                
+                  }
+
+    function validateState() {
+                    var state=document.getElementById('state').value.trim();  
+                  
+                    if (state.length==0) {
+                        stateError.innerHTML='State is Required';
+                        stateError.style.color='red'
+                        return false;
+                        }
+                        stateError.innerHTML='State is valid';
+                        stateError.style.color='white'
+                        return true;
+          
+                }
+
+    function validateLandmark() {
+                    var landmark=document.getElementById('landmark').value.trim();  
+                  
+                    if (landmark.length==0) {
+                        landmarkError.innerHTML='Landmark is Required';
+                        landmarkError.style.color='red'
+                        return false;
+                        }
+                        landmarkError.innerHTML='State is valid';
+                        landmarkError.style.color='white'
+                        return true;
+          
+                }
+
+
+
+
+
+
+
+    function validatePincode() {
+                    var pincode=document.getElementById('postcode').value.trim();  
+                
+                    if (pincode.length==0) {
+                        pincodeError.innerHTML='Pincode is Required';
+                        pincodeError.style.color='red'
+                        return false;
+                        }
+                    if (!/^[0-9]+$/.test(pincode)) {
+                            pincodeError.innerHTML = "Pincode must be digits"
+                            pincodeError.style.color='red'
+                            return false;
+                    }
+                          pincodeError.innerHTML='Pincode is valid';
+                          pincodeError.style.color='white'
+                          return true;
+                  
+                  }
+
+    function validateType(){
+                
+        var type=document.getElementById('type').value.trim();  
+                  
+        if (type.length==0) {
+            typeError.innerHTML='Type is Required';
+            typeError.style.color='red'
+            return false;
+            }
+            typeError.innerHTML='State is valid';
+            typeError.style.color='white'
+            return true;
+
+    }
+
+
+
+        jQuery_1_7_1(document).on("submit", "form", function (e) {
+            validateName()
+            validatePhone()
+            validateAddress()
+            validateCity()
+            validateState()
+            validatePincode()
+            validateLandmark()
+            validateType()
+            
+
+            
+            if (validateName() && validatePhone() && validateAddress() && validateCity() && validateState() &&  validatePincode() && validateLandmark() && validateType()  ) {
+               
+            } else {
+                e.preventDefault();
+                swal('Invalid data! Ensure You have entered correct data');
+                return true;
+            }
+        });    
+
+
+
+   
+
+
+
+
+</script>
+
+{%endblock%}

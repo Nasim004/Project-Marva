@@ -1,0 +1,269 @@
+
+
+{%load static%}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Product Page - Admin HTML Template</title>
+    <link rel="stylesheet" href="{% static 'https://fonts.googleapis.com/css?family=Roboto:400,700' %}" />
+
+    <link rel="stylesheet" href="{% static 'cssadminpanel/fontawesome.min.css' %}" />
+
+    <link rel="stylesheet" href="{% static 'cssadminpanel/bootstrap.min.css' %}" />
+
+    <link rel="stylesheet" href="{% static 'cssadminpanel/templatemo-style.css' %}">
+ 
+
+  </head>
+
+  <body id="reportsPage">
+    <nav class="navbar navbar-expand-xl">
+      <div class="container h-100">
+        <a class="navbar-brand" href="/admins/adminshome">
+          <h1 class="tm-site-title mb-0">Order Details</h1>
+        </a>
+        <button
+          class="navbar-toggler ml-auto mr-0"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <i class="fas fa-bars tm-nav-icon"></i>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mx-auto h-100">
+
+            <li class="nav-item">
+              <a class="nav-link" href="/admins/adminshome">
+                  <i class="fas fa-tachometer-alt"></i>
+                  Dashboard
+              </a>
+          </li>
+
+
+            <li class="nav-item">
+              <a class="nav-link " href="/admins/productlist">
+                <i class="fas fa-shopping-cart"></i> Products
+              </a>
+            </li>
+            
+            <li class="nav-item">
+              <a class="nav-link" href="/admins/categorylist">
+                  <i class="fas fa-shopping-cart"></i>
+                  Category
+              </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link active" href="/admins/orderlist">
+                <i class="fas fa-shopping-cart"></i>
+                Orders
+            </a>
+        </li>
+
+       
+          <li class="nav-item">
+            <a class="nav-link" href="/admins/offerlist">
+                <i class="fas fa-gift"></i>
+                Offers
+            </a>
+        </li>
+    
+     
+        <li class="nav-item">
+            <a class="nav-link" href="/admins/couponlist">
+                <i class="fas fa-circle"></i>
+                Coupons
+            </a>
+        </li>
+    
+
+        <li class="nav-item">
+          <a class="nav-link" href="/cart/saleslist">
+              <i class="fas fa-shopping-cart"></i>
+              Sales
+          </a>
+      </li>
+          
+
+            <li class="nav-item">
+              <a class="nav-link" href="/admins/userlist">
+                <i class="far fa-user"></i> Accounts
+              </a>
+            </li>
+          </ul>
+
+        </div>
+      </div>
+    </nav>
+
+
+
+
+
+
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">Order id</th>
+          <th scope="col">Customer</th>
+          <th scope="col">Product</th>
+          <th scope="col">Product Price</th>
+          <th scope="col">Quantity</th>
+          <th scope="col">Order date</th>
+          <th scope="col">Amount</th>
+          <th scope="col">Payment Method</th>
+          <th scope="col">Order Status </th>
+          <th scope="col">Update </th>
+
+
+
+        </tr>
+      </thead>
+      <tbody>
+    {% for o in oc %}
+        <tr>
+          <th scope="row">{{o.order_id}}</th>
+          <td >{{o.user.last_name}}</td>
+          <td >{{o.product.product_name}}</td>
+          <td >₹{{o.product.price}}</td>
+          <td >{{o.quantity}}</td>
+          <td>{{o.order.order_date}}</td>
+          <td>₹{{o.total}}</td>
+          <td>{{o.order.method}}</td>
+          <td>{{o.order.status}}</td>
+          <td>
+            <form action="/cart/orderupdate/{{o.order_id}}" method="post">
+              {%csrf_token%}
+
+            {% if o.order.status == 'confirmed' %}
+
+              <select class="custom-select tm-select-accounts" name="stat" >  
+               
+                
+            
+              <option value="Shipped">Shipped</option>  
+              <!-- <option value="At near hub">Reached in delivery hub</option>  
+              <option value="Out for delivery">Out for delivery</option>  
+              <option value="Delivered">Delivered</option> 
+              <option value="Cancelled">Cancelled</option>  -->
+            </select>
+              <button type="submit" class="btn btn-warning btn-sm">Update</button>
+
+
+            
+            {%elif o.order.status == 'Shipped' %}
+
+
+            <select class="custom-select tm-select-accounts" name="stat" >  
+             
+            <option value="At near hub">Reached in delivery hub</option>  
+
+          </select>
+
+            <button type="submit" class="btn btn-warning btn-sm">Update</button>
+   
+           
+            {%elif o.order.status == 'At near hub' %}
+
+            <select class="custom-select tm-select-accounts" name="stat" >  
+
+            <option value="Out for delivery">Out for delivery</option>  
+ 
+          </select>
+
+            <button type="submit" class="btn btn-warning btn-sm">Update</button>
+            
+            {%elif o.order.status == 'Out for delivery' %}
+
+            <select class="custom-select tm-select-accounts" name="stat" >  
+
+            <option value="Delivered">Delivered</option>  
+          
+
+            <button type="submit" class="btn btn-warning btn-sm">Update</button>
+
+
+            {%elif o.order.status == 'Delivered' %}
+
+            <p>Delivered Successfully</p>
+
+            
+            {%elif o.order.status == 'Return' %}
+            <p>Product Returned By The User</p>
+
+
+
+            {%elif o.order.status == 'Cancelled' %}
+
+            
+
+            {%else%}
+              
+
+            {%endif%}
+
+          </form>
+        </td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+
+
+    <tr>
+  
+
+    <!-- <div class="modal fade" id="exampleModal{{p.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div> -->
+
+
+
+
+
+
+
+
+
+    
+  
+    
+    
+
+    <script src="{% static 'jsadminpanel/jquery-3.3.1.min.js' %}"></script>
+ 
+    <script src="{% static 'jsadminpanel/bootstrap.min.js' %}"></script>
+    
+    <script>
+      $(function() {
+        $(".tm-product-name").on("click", function() {
+          window.location.href = "edit-product.html";
+        });
+      });
+    </script>
+  </body>
+</html>

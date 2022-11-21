@@ -1,0 +1,61 @@
+{%extends 'base.html'%}
+{%load static%}
+{%block content%}
+
+
+
+
+
+<div class="container mt-5">
+   
+        
+    <div class="col-md-8  mx-auto" style="width:60%;margin-top:80px;">
+        <div class="card">
+            <div class="card-header">
+                <h4>Edit Profile</h4>
+            </div>
+            <div class="card-body ">
+                <form action="/admins/add_update/{{add.id}}" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control" name="name"  id="name"  placeholder="Enter your name" value="{{add.name}}">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone</label>
+                        <input type="text" class="form-control" name="phone" id="phone" placeholder="Enter your phone" value="{{add.phone}}">
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Address</label>
+                        <input type="text" class="form-control" name="adds" id="address" placeholder="Enter your address" value="{{add.address}}">
+                    </div>
+                    <div class="form-group">
+                        <label for="city">District</label>
+                        <input type="text" class="form-control" name="district" id="distirct" placeholder="Enter your city" value="{{add.district}}">
+                    </div>
+                    <div class="form-group">
+                        <label for="state">State</label>
+                        <input type="text" class="form-control" name="state" id="state" placeholder="Enter your state" value="{{add.state}}">
+                    </div>
+                    <div class="form-group">
+                        <label for="pincode">Landmark</label>
+                        <input type="text" class="form-control" name="landmark" id="landmark" placeholder="Enter Landmark " value="{{add.landmark}}">
+                    </div>
+                    <div class="form-group">
+                        <label for="pincode">Pincode</label>
+                        <input type="text" class="form-control" name="postcode" id="postcode" placeholder="Enter your pincode" value="{{add.postcode}}">
+                    </div>
+                    <div class="form-group">
+                        <label for="pincode">Type</label>
+                        <input type="text" class="form-control"  name="type" id="postcode" placeholder="Home/Work etc.." value="{{add.type}}">
+                    </div>
+                    <span id="validate" class="text-danger"> </span>
+                    <button class="btn my-2 text-light" id="btn" type="submit" style="width:100%; background:#1C3879;">Edit Address</button> 
+                </form> 
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{%endblock%}
