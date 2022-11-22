@@ -136,24 +136,41 @@
                           
   
                     </div>
-  
+                   
+                    
+
+                    
                     <div class="form-group mb-3">
                         <label
                           for="category"
                           >Product</label
                         >
+                        
+                        
                         <select
                           class="custom-select tm-select-accounts"
                           id="product" name="id"
                         >
                           
-                        <option value="">Select Product</option>
-
-                          {%for p in product %}
+                        
 
                           
-                          <option value="{{p.id}}">{{p.product_name}} - ₹{{p.price}} </option>  
+                        {%for product in product %}
+                        
                           
+
+
+                          {% if product.product_name == offer.product.product_name %}
+ 
+                          
+                                <option value="{{offer.product.id}}"  selected>{{offer.product.product_name}} - ₹{{offer.product.price}}</option>
+                          
+                          {%else%}
+
+                                <option value="{{product.id}}">{{product.product_name}} - ₹{{product.price}}</option>  
+                          
+                          {%endif%}
+
                           {% endfor %}                    
                         </select>
                       </div>
@@ -234,3 +251,36 @@
           </div>
         </div>
       </div>
+
+
+
+      <script>
+        $("#startdate").on("change", function () {
+            $("#enddate").attr("min", $(this).val());
+        });
+    </script>
+
+
+    <script>
+      $(document).ready(function () {
+          let today = new Date()
+          var dd = today.getDate();
+          var mm = today.getMonth() + 1;
+  
+          var yyyy = today.getFullYear();
+          if (dd < 10) {
+              dd = '0' + dd;
+          }
+          if (mm < 10) {
+              mm = '0' + mm;
+          }
+          today = yyyy + '-' + mm + '-' + dd;
+  
+          $('#startdate').attr('min', today)
+          $('#startdate').change(function () {
+              let date = document.getElementById('startdate').value
+              $('#exp').attr('min', date)
+          })
+      })
+
+    </script>

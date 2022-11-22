@@ -15,14 +15,16 @@ from accounts.models import address
 from cart.models import oldcart
 
 
-
+from products.models import Category
 
 
 
 @never_cache
 def cart(request):
+    c1=Category.objects.all()
     if request.user.is_authenticated and request.user.is_active :
         user = request.user.user_details
+        
 
         if Cart.objects.filter(user=user):
 
@@ -61,9 +63,10 @@ def cart(request):
 
                 shipping = 0
                 total = subtotal + shipping
-                return render(request, 'cart.html', {'cart': cart, 'subtotal': subtotal, 'total': total})
-        return render(request, 'cart.html', {'message':"CART IS EMPTY"})      
+                return render(request, 'cart.html', {'cart': cart, 'subtotal': subtotal, 'total': total,'c1':c1})
+        return render(request, 'cart.html', {'message':"CART IS EMPTY",'c1':c1})      
     else:
+        c1=Category.objects.all()
         if not request.session.session_key:
             request.session.create()
         request.session['guest_key']=request.session.session_key
@@ -94,7 +97,7 @@ def cart(request):
 
         shipping = 0
         total = subtotal + shipping
-        return render(request, 'cart.html', {'cart': cart, 'subtotal': subtotal, 'total': total})    
+        return render(request, 'cart.html', {'cart': cart, 'subtotal': subtotal, 'total': total,'c1':c1})    
 
 
 
@@ -262,6 +265,7 @@ def removecart(request,id):
     return redirect('cart')
 
 def checkout(request):
+ c1=Category.objects.all()
  if request.user.is_authenticated:
  
     if request.method == 'POST' and 'address_id' in request.POST   :
@@ -311,6 +315,7 @@ def checkout(request):
         return render(request,'placed.html')
 
     elif request.method == 'POST' and 'code' in request.POST  :
+        c1=Category.objects.all()
         user = request.user.user_details
         code = request.POST['code']
         cart = Cart.objects.filter(user=user)
@@ -350,13 +355,13 @@ def checkout(request):
                     print(total)
                 else:
                     messages.info(request,'The minimum amount not reached')
-                    return render(request,'checkout.html',{'subtotal': subtotal, 'total': total, 'address': add,'coupon':coupon}) 
+                    return render(request,'checkout.html',{'subtotal': subtotal, 'total': total, 'address': add,'coupon':coupon,'c1':c1}) 
             else:
                 messages.info(request,'Coupon Expired') 
-        return render(request,'checkout.html',{'subtotal': subtotal, 'total': total, 'address': add,'coupon':coupon})       
+        return render(request,'checkout.html',{'subtotal': subtotal, 'total': total, 'address': add,'coupon':coupon,'c1':c1})       
     
     else:
-
+        c1=Category.objects.all()
         user = request.user.user_details
         cart = Cart.objects.filter(user=user)
         if len(cart)!=0:
@@ -382,7 +387,7 @@ def checkout(request):
                         x = i.product.p_offer_price*i.quantity
                         subtotal = subtotal+x
             total = subtotal
-            return render(request, 'checkout.html', {'subtotal': subtotal, 'total': total, 'address': add})
+            return render(request, 'checkout.html', {'subtotal': subtotal, 'total': total, 'address': add,'c1':c1})
         messages.error(request, 'Cart is empty')
         return redirect('cart')
  return redirect ('login')
@@ -507,33 +512,31 @@ def saleslist(request):
 def date_select(request):
     start = request.POST['start_date']
     end = request.POST['end_date']
-    print("end=",end)
+    if len(start) < 1 :
+        messages.error(request,'Choose Start date')
+        return redirect(saleslist)
+    if len(end) < 1 :
+        messages.error(request,'Choose End date')
+        return redirect(saleslist)
     od = Order.objects.filter(order_date__range=[start,end])
-    if len(od) ==0:
-        return render(request, 'salesreport.html')
-    else:
-        return render(request, 'salesreport.html',{'od':od})
+    o_count = len(od)
+    return render(request, 'salesreport.html',{'od':od,'o_count' : o_count})
 
 
 
 def yearly_sales(request):
     year = request.POST['year']
     od = Order.objects.filter(order_date__year=year)
-    if len(od) ==0:
-        return render(request, 'salesreport.html')
-    else:    
-        return render(request, 'salesreport.html',{'od':od})
+    o_count = len(od)   
+    return render(request, 'salesreport.html',{'od':od,'o_count' : o_count})
 
 
 
 def monthly_sales(request):
     month = request.POST['month']
     od = Order.objects.filter(order_date__month=month)
-    if len(od) ==0:
-        return render(request, 'salesreport.html')
-    else:
-
-        return render(request, 'salesreport.html',{'od':od})
+    o_count = len(od)
+    return render(request, 'salesreport.html',{'od':od,'o_count' : o_count})
 
 
 

@@ -221,6 +221,7 @@ def product_update(request,id):
 
 def product(request,id):
     category=Category.objects.get(id=id)
+    c1=Category.objects.all()
     product=product_details.objects.filter(category=category).all()
     page = request.GET.get('page',1)
     product_paginator = Paginator(product, PRODUCTS_PER_PAGE)
@@ -230,7 +231,7 @@ def product(request,id):
         product = product_paginator.page(product_paginator.num_pages)
     except:
         product = product_paginator.page(PRODUCTS_PER_PAGE)
-    return render(request,'product.html',{'product':product,'page_obj':product,'is_paginated':True,'paginator':product_paginator})
+    return render(request,'product.html',{'product':product,'page_obj':product,'is_paginated':True,'paginator':product_paginator,'c1':c1})
     
 
 
@@ -312,8 +313,9 @@ def userprofile(request):
 
         details=user_details.objects.get(user=request.user.id)
         addres=address.objects.filter(user=details)
+        category=Category.objects.all()
 
-        return render(request,'userprofile.html',{'details':details,'addres':addres})
+        return render(request,'userprofile.html',{'details':details,'addres':addres,'category':category})
     return render(request,'login.html')
 
 

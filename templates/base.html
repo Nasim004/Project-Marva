@@ -96,7 +96,7 @@
 					<!-- Logo desktop -->		
 					<a  href="/" class="logo">
 						<p style="color: black;font-weight:900;font-size:35px">MARVA</p>
-						<!-- <img  src="{% static 'images/icons/logo-01.png' %}" alt="IMG-LOGO"> -->
+						
 					</a>
 
 					<!-- Menu desktop -->
@@ -109,7 +109,7 @@
 									<li><span style="font-weight: bold;">Hello {{user.first_name}}</span></li>
 									<li><a  href="/admins/userprofile">My Profile</a></li>
 									<li><a  href="/cart/myorder">My Orders</a></li>
-									<!-- <li><a  href="{% static '#">Wishlist</a></li> -->
+									
 									
 
 								</ul>
@@ -121,7 +121,7 @@
 
 							</li>
 
-                            <li>
+                            <!-- <li>
 								<a  href="/admins/product/4">Necklace</a>
 							</li>
                             <li>
@@ -132,19 +132,23 @@
 							</li>
                             <li>
 								<a  href="/admins/product/15">Earrings</a>
-							</li>
-							<!-- {% for c in category %}
+							</li> -->
+							{% for c in category %}
 
 							<li>
 								<a  href="/admins/product/{{c.id}}">{{c.category_name}}</a>
 							</li>
 							
-							{% endfor %} -->
+							{% endfor %}
 
+							{% for c in c1 %}
 
 							<li>
-								<a  href="#">Contact</a>
+								<a  href="/admins/product/{{c.id}}">{{c.category_name}}</a>
 							</li>
+							
+							{% endfor %}
+							
 
 
 
@@ -153,18 +157,7 @@
 
 					<!-- Icon header -->
 					<div class="wrap-icon-header flex-w flex-r-m ">
-						<!-- <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-modal-search">
-							<i class="zmdi zmdi-search"></i>
-						</div> -->
-
-
-						<!-- <a  href="{% static '#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 " >
-							<i class="zmdi zmdi-favorite-outline"></i>
-						</a> -->
-
-						<!-- <a  href="{% static '#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti" data-notify="3">
-							<i class="zmdi zmdi-favorite-outline"></i>
-						</a> -->
+						
 
 						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11  js-show-cart" >
 							<a href="/cart/cart" style="color:black;"><i class="zmdi zmdi-shopping-cart"></i></a>
@@ -178,7 +171,7 @@
 		<div class="wrap-header-mobile">
 			<!-- Logo moblie -->		
 			<div class="logo-mobile">
-				<a  href="{% static '#" class="logo">
+				<a  href="/" class="logo">
 					<p style="color: black;font-weight:900;font-size:35px">MARVA</p>
 				</a>
 			</div>
@@ -236,7 +229,7 @@
 				{% if user.is_authenticated %}
 				<li>
 					
-					<a  href="{% static '#">My Profile</a>
+					<a>My Profile</a>
 					<ul class="sub-menu-m">
 						<li><a href="">Hello {{user.first_name}}</a></li>
 						<li><a  href="/admins/userprofile">My Profile</a></li>
@@ -254,18 +247,21 @@
 
                 
 
+				<{% for c in category %}
+
 				<li>
-					<a  href="/admins/product/4">Necklace</a>
+					<a  href="/admins/product/{{c.id}}">{{c.category_name}}</a>
 				</li>
+				
+				{% endfor %}
+
+				{% for c in c1 %}
+
 				<li>
-					<a  href="/admins/product/8">Rings</a>
+					<a  href="/admins/product/{{c.id}}">{{c.category_name}}</a>
 				</li>
-				<li>
-					<a  href="/admins/product/14">Bangles</a>
-				</li>
-				<li>
-					<a  href="/admins/product/15">Earrings</a>
-				</li>
+				
+				{% endfor %}
 
                
 
