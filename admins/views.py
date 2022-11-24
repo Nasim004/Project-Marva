@@ -173,7 +173,7 @@ def category_delete(request,id):
 
 def add_category(request):
     if request.method == 'GET':
-        return render(request,'addcategory.html ')
+        return render(request,'addcategory.html')
     if request.method == 'POST':
         category_name=request.POST.get('category_name')
         category_name1=category_name[:-1]
@@ -276,14 +276,13 @@ def category_update(request,id):
 
 
 def number_check(request):
-   if request.method=='POST' and request.POST['phone_number']:
-      
-       global phone
-       phone=request.POST['phone_number']
+   if request.method=='POST':
+       phone=request.POST.get('phone_number')
        print("phone1=",phone)
        otp='123456'
        message_handler = MessageHandler(phone,otp).sent_otp_on_phone()
-       return redirect('otp_validate')
+       print('++++++++')
+       return render(request,'otpcheck.html',{'phone':phone})
    return render(request,'otplogin.html')
 
 @never_cache
@@ -292,6 +291,9 @@ def otp_validate(request):
      return redirect(home)
    if request.method=='POST' and request.POST['otp']:
        otp1= int(request.POST['otp'])
+       print('######')
+       phone=request.POST.get('phone')
+       print('******',phone)
        validate = MessageHandler(phone,otp1).validate()
        print("validate=",validate)
        if validate=="approved":
@@ -310,7 +312,6 @@ def otp_validate(request):
  
 def userprofile(request):
     if request.user.is_authenticated:
-
         details=user_details.objects.get(user=request.user.id)
         addres=address.objects.filter(user=details)
         category=Category.objects.all()
@@ -411,15 +412,15 @@ def change_password(request):
     return render(request,'passedit.html')            
 
 
-def login_resend(request):
+def login_resend(request,phone):
     otp=123456
     message_handler = MessageHandler(phone,otp).sent_otp_on_phone()
     return redirect('otp_validate')
 
-def signup_resend(request):
-    otp=123456
-    message_handler = MessageHandler(phone,otp).sent_otp_on_phone()
-    return redirect('signup_otp_validate')
+# def signup_resend(request):
+#     otp=123456
+#     message_handler = MessageHandler(phone,otp).sent_otp_on_phone()
+#     return redirect('signup_otp_validate')
 
 
 

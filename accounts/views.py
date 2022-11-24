@@ -169,7 +169,7 @@ def otp_validate_reg(request):
 
 
 # USER SIDE LOGIN / REGISTER AND LOGOUT ENDS HERE 
-def signup_resend(request):
-    otp=123456
-    message_handler = MessageHandler(phone_number,otp).sent_otp_on_phone()
-    return redirect('otp_validate_reg')
+# def signup_resend(request,phone_number):
+#     otp=123456
+#     message_handler = MessageHandler(phone_number,otp).sent_otp_on_phone()
+#     return redirect('otp_validate_reg')

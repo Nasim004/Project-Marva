@@ -88,7 +88,7 @@
     
   <div class="d-flex justify-content-center align-items-center flex-column container">
 
-    <form action="" method="post">
+    <form action="/admins/otp_validate" method="post">
 
       {%csrf_token%}
 
@@ -96,6 +96,7 @@
           <h5 class="m-0">OTP Verification</h5>
           <div class="d-flex flex-row mt-5    ">
               <input type="text" name="otp" class="numberplate" onkeyup="validatePhonenumber()"  id="otp" placeholder="Enter the OTP"/>
+              <input type="hidden" name="phone" value="{{phone}}">
           </div>
           <small id="phonenumber-error" class="text-center m-t-100" ></small>
 
@@ -106,7 +107,7 @@
     </form>
 
     <div>
-      <a href="login_resend">
+      <a href="login_resend/{{phone}}">
 
         <button  id="btnCounter" disabled>Time left:<span id="count"></span><br>Resend OTP</button>
     

@@ -642,7 +642,7 @@
 
 						<div class="form-group">
 							<label for="email"><i class="zmdi zmdi-email"></i></label>
-							<input type="text" name="email" id="email" onkeyup="validateEmail()" placeholder="Your Email"/>
+							<input type="email" name="email" id="email" onkeyup="validateEmail()" placeholder="Your Email"/>
 						</div>
 						<span id="email-error" class="m-l-30"></span>
 
@@ -666,10 +666,7 @@
 						<small id="cpassword-error" class="m-l-30" ></small>
 
 
-						<!-- <div class="form-group">
-							<input type="checkbox" name="agree-term" id="agree-term" class="agree-term" />
-							<label for="agree-term" class="label-agree-term"><span><span></span></span>I agree all statements in  <a href="#" class="term-service">Terms of service</a></label>
-						</div> -->
+						
 						<div class="form-group form-button">
 							<input type="submit" name="signup" id="signup" class="form-submit" value="Register"/>
 						</div>
@@ -707,24 +704,9 @@
 		var phonenumberError = document.getElementById('phonenumber-error');
 		var passwordError = document.getElementById('password-error');
         var cpasswordError = document.getElementById('cpassword-error');
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 		function validateName() {
             var firstname=document.getElementById('first_name').value.trim();
-			var Required=4;
+			var Required=2;
             var left=Required - firstname.length;
             if (firstname.length==0) {
                 firstnameError.innerHTML='name is required';
@@ -750,7 +732,7 @@
 
 			function validateLname() {
 				var lastname=document.getElementById('last_name').value.trim();
-				var Required=2;
+				var Required=1;
 				var left=Required - lastname.length;
 				if (lastname.length==0) {
 					lastnameError.innerHTML='name is required';
