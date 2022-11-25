@@ -79,23 +79,63 @@
 
                               <li>
 
-                                <!-- <input   id="f-option" name="payment_selector"  value="Cash on delievery" > -->
-                                <button class="btn btn-warning my-2 text-dark font-italic w-25" id="btn" name="payment_selector"  value="Cash on delievery"  type="submit" style="font-size:10px ;font-weight: bold;">Cash On Delivery</button> 
+                                <input hidden type="radio"   id="f-option" name="payment_selector"  value="Cash on delievery" checked>
+                                <!-- <button class="btn my-2 text-light" id="btn" type="submit" style="width:100%; background:#456ac1;">Cash on Delivery</button>  -->
+                                <!-- <button class=" p-lr-40 p-t-20 p-b-30 m-l-63 m-r-40 m-lr-0-xl p-lr-15-sm btn btn-warning my-2 text-dark font-italic w-25" id="btn" name="payment_selector"  value="Cash on delievery"  type="submit" style="font-size:15px ;font-weight: bold;">Cash On Delivery</button>  -->
 
                                 <!-- <label for="f-option" style="color: #000000;">Cash on delivery</label> -->
                                 
                                 <div class="check"></div>
                               </li>
+                            </ul>
+
+                              <div class="p-lr-40 p-t-20 p-b-30 m-l-63 m-r-40 m-lr-0-xl p-lr-15-sm">
+                                <a href="/cart/checkout"><button class="btn btn-warning  w-50 rounded-pill" type="submit" style="height:45px;font-weight:bold;font-size:15px;"
+                                  > <i>Cash on Delivery</i> </button> 
+                                </a>
+                              </div>
                               
 
                                 <!-- <input  id="payment" name="payment_selector" > -->
                                 
-                                <div id="paypal-button-container" class="w-25" ></div>
+                                <div id="paypal-button-container" class="p-lr-40 m-l-63 m-r-40 m-lr-0-xl p-lr-15-sm w-50" ></div>
 
-                                <button id="rzp-button1" class="btn btn-warning w-25 font-weight-bold font-italic  text-dark" style="font-size:10px ;font-weight: bold;"  >RazorPay</button>
-                            </ul>
+                                <div class="p-lr-40 p-t-20 p-b-40 m-l-63 m-r-40 m-lr-0-xl p-lr-15-sm">
+                                  <button id="rzp-button1" class="btn btn-warning w-50 font-weight-bold font-italic  text-dark" style="font-size:19px ;font-weight: bold;height:45px;"  >RazorPay</button>
+
+                                </div>
+                           
 
                         </div> 
+
+                        <!-- <div class="mt-5">
+                          <h4 class="mtext-109 cl2 p-b-30">
+                              Payment Method:
+                          </h4>
+                              
+                            <ul>
+                            <li>
+                              <input hidden type="radio" id="cod" name="payment_selector" value="Cash on delivery" checked>
+                              
+                              <div class="check"></div>
+                            </li>
+                          </ul>
+                          <div class="p-lr-40 p-t-20 p-b-30 m-l-63 m-r-40 m-lr-0-xl p-lr-15-sm">
+                            <a href="/cart/checkout"><button class="btn btn-dark payWithRazorpay w-100 rounded-pill" type="submit" style="height:45px;border-radius: 50px;font-weight:bold;font-size:19px;"
+                              > <i>Cash on Delivery</i> </button> 
+                            </a> 
+                         </div>
+                          <div class=" p-lr-40   m-l-63 m-r-40 m-lr-0-xl p-lr-15-sm" id="paypal-button-container">
+      
+                          </div>
+                          <div class="  p-lr-40 p-t-20 p-b-40 m-l-63 m-r-40 m-lr-0-xl p-lr-15-sm">
+                          <button type="button" class="btn btn-dark payWithRazorpay w-100 rounded-pill" 
+                           id="rzp-button1" style="height:45px;border-radius: 50px;font-weight:bold;font-size:19px;">
+                           <i>RazorPay</i>
+                          </button>
+                          </div>
+
+                      </div> -->
                     <!-- <button class="btn my-2 text-light" id="btn" type="submit" style="width:100%; background:#456ac1;">Place Order</button>  -->
 
                     </form>

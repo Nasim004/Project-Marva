@@ -1,5 +1,4 @@
-import email
-from msilib import change_sequence
+
 from unicodedata import category, name
 from django.shortcuts import redirect, render,HttpResponseRedirect
 from django.contrib import messages

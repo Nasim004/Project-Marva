@@ -14,7 +14,7 @@ class MessageHandler:
        client=Client(settings.ACCOUNT_SID,settings.AUTH_TOKEN)
        verification = client.verify \
                     .v2 \
-                    .services('VA00cc0f49d98e9be3226d32d97b0ef70d') \
+                    .services('VAd07225a69b0da5d0150937dd787d0467') \
                     .verifications \
                     .create(to=self.phone_number, channel='sms')
 
@@ -22,7 +22,7 @@ class MessageHandler:
        client=Client(settings.ACCOUNT_SID,settings.AUTH_TOKEN)
        verification_check = client.verify \
                           .v2 \
-                          .services('VA00cc0f49d98e9be3226d32d97b0ef70d') \
+                          .services('VAd07225a69b0da5d0150937dd787d0467') \
                           .verification_checks \
                           .create(to=self.phone_number,code=self.otp)
        validation=verification_check.status

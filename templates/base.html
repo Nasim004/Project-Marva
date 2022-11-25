@@ -273,6 +273,15 @@
         {%endblock%}
 
 
+		{% if messages %}
+				{% for message in messages %}
+				<script>
+					swal('{{message}}')
+				</script>
+				{% endfor %}
+	{% endif %}
+
+
         <script  src="{% static 'vendor/jquery/jquery-3.2.1.min.js' %}"></script>
         <script  src="{% static 'vendor/animsition/js/animsition.min.js' %}"></script>
         <script  src="{% static 'vendor/bootstrap/js/popper.js' %}"></script>
