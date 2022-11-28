@@ -4,6 +4,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Otp Page</title>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
     <script type="text/javascript">
     var jQuery_1_7_1 = $.noConflict(true);
@@ -103,7 +105,7 @@
           <small id="phonenumber-error" class="text-center m-t-100" ></small>
           
           <div class="text-center mt-5">
-              <input type="submit"   id="signin" class="form-submit" value="Log in"  />
+              <input type="submit"   id="signin" class="form-submit" value="Verify"  />
           </div>
       </div>
  
@@ -118,6 +120,14 @@
 
 </div>
 
+{% if messages %}
+				{% for message in messages %}
+				<script>
+					swal('{{message}}')
+				</script>
+				{% endfor %}
+{% endif %}
+			
 
 <script>
   var phonenumberError = document.getElementById('phonenumber-error');
@@ -128,13 +138,13 @@
     console.log(num)
     
     if (num.length==0) {
-      phonenumberError.innerHTML='Otp is Required';
+      phonenumberError.innerHTML='Otp length is not matching';
       phonenumberError.style.color='red'
       return false;
     }
     
     
-    phonenumberError.innerHTML='Otp is valid';
+    phonenumberError.innerHTML='';
     phonenumberError.style.color='green'
     return true; 
     

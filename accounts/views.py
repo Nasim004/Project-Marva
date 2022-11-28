@@ -165,6 +165,11 @@ def otp_validate_reg(request):
 
             messages.info(request,"Acoount Created")
             return redirect('home')
+        else:
+            messages.info(request,"Wrong OTP")
+            context = {'first_name':first_name,'last_name':last_name,'email':email,'phone_number':phone_number,'password':password}
+            return render(request,'otpsignincheck.html',context)
+
 
     return render(request,'otpsignincheck.html')
 

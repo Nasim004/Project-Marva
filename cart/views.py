@@ -128,6 +128,32 @@ def addtocart(request,id):
             cart = guestCart.objects.create(product=product, user_ref=request.session.session_key)
             return redirect('cart')
 
+# add to cart using ajax
+def addtocart2(request,id):
+    if request.user.is_authenticated:
+        product = product_details.objects.get(id=id)
+        uid = request.user.user_details
+        if Cart.objects.filter(product=id, user=uid).exists():
+            cart = Cart.objects.get(product=id, user=uid)
+            cart.quantity = cart.quantity+1
+            cart.save()
+            return JsonResponse({'status': True})
+        else:
+            cart = Cart.objects.create(product=product, user=uid)
+            return JsonResponse({'status': True})
+    else:
+        if not request.session.session_key:
+            request.session.create()
+        product = product_details.objects.get(id=id)
+        if guestCart.objects.filter(product=id,user_ref=request.session.session_key).exists():
+            cart = guestCart.objects.get(product=id,)
+            cart.quantity = cart.quantity+1
+            cart.save()
+            return JsonResponse({'status': True})
+        else:
+            cart = guestCart.objects.create(product=product, user_ref=request.session.session_key)
+            return JsonResponse({'status': True})          
+
 
 
 def up(request,id):
@@ -459,13 +485,14 @@ def orderlist(request):
 
 def myorder(request):
     if request.user.is_authenticated:
+        c1=Category.objects.all()
 
         details=user_details.objects.get(user=request.user.id)
         orders=Order.objects.filter(user=details)
         cart2=oldcart.objects.filter(user=details)
         cart1 =reversed(list(cart2))
 
-        return render(request,'myorder.html',{'details':details,'orders':orders,'cart1':cart1})
+        return render(request,'myorder.html',{'details':details,'orders':orders,'cart1':cart1,'c1':c1})
     return render(request,'login.html')
 
 

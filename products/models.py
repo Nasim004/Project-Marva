@@ -7,6 +7,7 @@ from django.db import models
 
 class Category(models.Model):
     category_name=models.CharField(max_length=20)
+    img1=models.ImageField(upload_to='assets/images',blank=True,default="",null=True)
     offer=models.FloatField(default=0)
 
    
@@ -18,9 +19,13 @@ class Category(models.Model):
 class product_details(models.Model):
     product_name=models.CharField(max_length=50)
     des=models.CharField(max_length=200)
-    img=models.ImageField(upload_to='assets/images')  
+    img=models.ImageField(upload_to='assets/images',blank=True,default="",null=True)
+    img2=models.ImageField(upload_to='assets/images',blank=True,default="",null=True)
+    img3=models.ImageField(upload_to='assets/images',blank=True,default="",null=True)
+    img4=models.ImageField(upload_to='assets/images',blank=True,default="",null=True)    
     price=models.IntegerField()
     stock=models.IntegerField()
+    gram=models.FloatField()
     category=models.ForeignKey(Category,on_delete=models.CASCADE)
     p_offer=models.FloatField(default=0)
     p_offer_price=models.FloatField(default=0)  

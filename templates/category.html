@@ -128,11 +128,13 @@
                     {% for c in category %}
                     <tr> 
                       <td class="tm-product-name">{{c.category_name}}</td>
+
                       <td>
                         <a href="category_edit/{{c.id}}" >
                           <button style="font-size:13px ;" type="button" class="btn btn-light">Edit</button>
                         </a>
                       </td> 
+                      
                       <td class="text-center">
                         <a href="category_delete/{{c.id}}" data-toggle="modal" data-target="#exampleModal5{{c.id}}" class="tm-product-delete-link">
                           <i class="far fa-trash-alt tm-product-delete-icon"></i>

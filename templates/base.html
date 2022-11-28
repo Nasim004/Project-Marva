@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
 
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
     <script type="text/javascript">
     var jQuery_1_7_1 = $.noConflict(true);
     </script>	
@@ -121,18 +121,7 @@
 
 							</li>
 
-                            <!-- <li>
-								<a  href="/admins/product/4">Necklace</a>
-							</li>
-                            <li>
-								<a  href="/admins/product/8">Rings</a>
-							</li>
-                            <li>
-								<a  href="/admins/product/14">Bangles</a>
-							</li>
-                            <li>
-								<a  href="/admins/product/15">Earrings</a>
-							</li> -->
+                            
 							{% for c in category %}
 
 							<li>
@@ -273,13 +262,11 @@
         {%endblock%}
 
 
-		{% if messages %}
-				{% for message in messages %}
-				<script>
-					swal('{{message}}')
-				</script>
-				{% endfor %}
-	{% endif %}
+
+
+
+
+
 
 
         <script  src="{% static 'vendor/jquery/jquery-3.2.1.min.js' %}"></script>
@@ -335,10 +322,17 @@
             });
         </script>
         <script  src="{% static 'js/main.js' %}"></script>
-		<!-- <script  src="{% static 'js/checkout.js' %}"></script> -->
+	
 
+		<script  src="{% static 'js/zoomsl.min.js' %}"></script>
 
-
+		<script>
+		$(document).ready(function(){
+			$('.zoom-p').imagezoomsl({
+			zoomrange:[1,1]
+			});
+		})
+		</script>
     
     </body>
 

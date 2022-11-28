@@ -14,9 +14,11 @@
         <div class="card-body">
           <h5 class="card-title" >{{o.product.product_name}}</h5>
           <p class="card-text">{{o.product.des}}</p>
+          <p class="card-text">Gram : {{o.product.gram}}</p>
+
         </div>
         <ul class="list-group list-group-flush">
-          <li class="list-group-item">Price : {{o.product.price}} </li>
+          <li class="list-group-item">Price : {{o.product.price}} </li> 
           <li class="list-group-item">Status :{{o.order.status}} </li>
           <li class="list-group-item">Quantity :{{o.quantity}} </li>
           <li class="list-group-item">Date :{{o.order.order_date}} </li>

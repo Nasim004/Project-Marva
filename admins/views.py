@@ -9,7 +9,7 @@ from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 
 from accounts.models import user_details
 from accounts.models import address
-
+from django.db.models import Q
 
 from products.models import product_details
 from products.models import Category
@@ -26,7 +26,7 @@ from admins.mixins import MessageHandler
 
 
 
-PRODUCTS_PER_PAGE = 4    
+PRODUCTS_PER_PAGE = 12    
 
 # ADMIN SIDE AND LOGOUT STARTS HERE 
 
@@ -138,12 +138,16 @@ def addproduct(request):
         product_name=request.POST.get('product_name')  
         des=request.POST.get('des')     
         image=request.FILES['image'] 
+        image2=request.FILES['image2'] 
+        image3=request.FILES['image3'] 
+        image4=request.FILES['image4'] 
+        gram=request.POST.get('gram')
         price=request.POST.get('price')    
         # dis_price=request.POST.get('dis_price')
         category=request.POST.get('id')
         category=Category.objects.get(id=category)  
         stock=request.POST.get('stock')
-        products= product_details.objects.create(product_name=product_name,des=des,img=image,price=price,category=category,stock=stock)
+        products= product_details.objects.create(product_name=product_name,des=des,img=image,img2=image2,img3=image3,img4=image4,price=price,category=category,stock=stock,gram=gram)
         products.save()
 
         return redirect(productlist)
@@ -170,21 +174,50 @@ def category_delete(request,id):
 
 
 
+
+
+import re
 def add_category(request):
     if request.method == 'GET':
         return render(request,'addcategory.html')
     if request.method == 'POST':
         category_name=request.POST.get('category_name')
+        img1=request.FILES['image'] 
         category_name1=category_name[:-1]
-        if Category.objects.filter(category_name__icontains=category_name):
-                    messages.info(request,"Category Exist")
-                    return redirect('categorylist')
-        elif Category.objects.filter(category_name__icontains=category_name1):
-            messages.info(request,'Category is already exist')
+        test_string = 'category_name'
+        matched = re.match("[/b"+category_name+"/b]", test_string)
+        is_match = bool(matched)
+        print(is_match)
+        if is_match == True:
+            messages.info(request,"Category Exist")
             return redirect('categorylist')
-        category=Category.objects.create(category_name=category_name)
+        elif Category.objects.filter(category_name__icontains=category_name):
+            messages.info(request,"Category Exist")
+            return redirect('categorylist')
+
+        elif Category.objects.filter(category_name__icontains=category_name1):
+            messages.info(request,'Category is  exist')
+            return redirect('categorylist')
+        category=Category.objects.create(category_name=category_name,img1=img1)
         category.save()
         return redirect ('categorylist')
+
+# def add_category(request):
+#     if request.method == 'GET':
+#         return render(request,'addcategory.html')
+#     if request.method == 'POST':
+#         category_name=request.POST.get('category_name')
+#         category_name1=category_name[:-1]
+#         if Category.objects.filter(category_name__icontains=category_name):
+#                     messages.info(request,"Category Exist")
+#                     return redirect('categorylist')
+#         elif Category.objects.filter(category_name__icontains=category_name1):
+#             messages.info(request,'Category is already exist')
+#             return redirect('categorylist')
+#         image=request.POST.get('image')
+#         category=Category.objects.create(category_name=category_name,img1=image)
+#         category.save()
+#         return redirect ('categorylist')
 
 
 
@@ -202,7 +235,11 @@ def product_update(request,id):
         product=product_details.objects.get(id=id)
         product_name=request.POST.get('product_name')  
         des=request.POST.get('des')     
+        gram=request.POST.get('gram')
         image=request.FILES.get('image',product.img)  
+        image2=request.FILES.get('image2',product.img2)  
+        image3=request.FILES.get('image3',product.img3)  
+        image4=request.FILES.get('image4',product.img4)  
         price=request.POST.get('price')    
         category=request.POST.get('id')
         stock=request.POST.get('stock')
@@ -210,9 +247,13 @@ def product_update(request,id):
         product.product_name=product_name
         product.des=des
         product.img=image
+        product.img2=image2
+        product.img3=image3
+        product.img4=image4
         product.price=price
         product.category=category
         product.stock=stock
+        product.gram=gram
         product.save()
         return redirect(productlist)
 
@@ -222,6 +263,18 @@ def product(request,id):
     category=Category.objects.get(id=id)
     c1=Category.objects.all()
     product=product_details.objects.filter(category=category).all()
+    price = request.GET.get('price', "")
+    gram = request.GET.get('gram', "")
+
+
+    if 'search' in request.GET:
+            search = request.GET['search']
+            multiple_search = Q(Q(product_name__icontains=search))
+            product = product_details.objects.filter(multiple_search)
+    if price:
+        product = product.filter(price__lt = price).order_by(('-price'))
+    if gram:
+        product = product.filter(gram__lt = gram).order_by(('-gram'))
     page = request.GET.get('page',1)
     product_paginator = Paginator(product, PRODUCTS_PER_PAGE)
     try:
@@ -265,9 +318,11 @@ def category_edit(request,id):
 
 def category_update(request,id):
     if request.method == 'POST':
+        category=Category.objects.get(id=id) 
         category_name=request.POST.get('category_name')  
-        category=Category.objects.get(id=id)  
+        image=request.FILES.get('image',category.img1)  
         category.category_name=category_name
+        category.img1=image
         category.save()
         messages.info(request,"Categroy Updated")
     return redirect('categorylist')
@@ -299,8 +354,10 @@ def otp_validate(request):
            user=CustomBackend.authenticate(request,phone_number=phone)
            print("-----")
            print (user)
-          
            return redirect('home')
+       else:
+            messages.info(request,"Wrong OTP")
+            return render(request,'otpcheck.html',{'phone':phone})
       
    return render(request,'otpcheck.html')
 

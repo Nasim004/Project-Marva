@@ -4,6 +4,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Otp Page</title>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
     <script type="text/javascript">
     var jQuery_1_7_1 = $.noConflict(true);
@@ -103,20 +104,30 @@
           <div class="text-center mt-5">
               <input type="submit"   id="signin" class="form-submit" value="Log in"  />
           </div>
+          <div class="text-center mt-5">
+            <a href="login_resend/{{phone}}">
+      
+              <i  id="btnCounter" disabled>Time left:<span id="count"></span><br>Resend OTP</i>
+          
+            </a>
+          </div>
+
       </div>
+      
     </form>
 
-    <div>
-      <a href="login_resend/{{phone}}">
-
-        <button  id="btnCounter" disabled>Time left:<span id="count"></span><br>Resend OTP</button>
     
-      </a>
-    </div>
     
   </div>
 
 
+  {% if messages %}
+  {% for message in messages %}
+  <script>
+    swal('{{message}}')
+  </script>
+  {% endfor %}
+  {% endif %}
 
 
 <script>
@@ -124,7 +135,7 @@
   
   function validatePhonenumber(){
     var phonenumber = document.getElementById('otp').value.trim();
-    var num = phonenumber.replace(/[^\d]/g, '');
+    //var num = phonenumber.replace(/[^\d]/g, '');
     console.log(num)
     
     if (num.length<=5) {
@@ -132,7 +143,11 @@
       phonenumberError.style.color='red'
       return false;
     }
-    
+    if (!/^[0-9]+$/.test(phonenumber)) {
+      phonenumberError.innerHTML = "Otp must be digits"
+      phonenumberError.style.color='red'
+      return false;
+}
     
     phonenumberError.innerHTML='';
     phonenumberError.style.color='green'

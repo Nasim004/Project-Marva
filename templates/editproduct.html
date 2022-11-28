@@ -8,9 +8,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Edit Product</title>
-
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script type="text/javascript">
+      var jQuery_1_7_1 = $.noConflict(true);
+      </script>	
     <!-- Cropper -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.css"
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.css"
 		integrity="sha512-+VDbDxc9zesADd49pfvz7CgsOl2xREI/7gnzcdyA9XjuTxLXrdpuz21VVIqc5HPfZji2CypSbxx1lgD7BgBK5g=="
 		crossorigin="anonymous" referrerpolicy="no-referrer" />
 
@@ -108,13 +111,7 @@
         </li>
       </ul>
 
-          <!-- <ul class="navbar-nav">
-            <li class="nav-item">
-              <a class="nav-link d-block" href="/admins/admin_logout">
-                <b>Logout</b>
-              </a>
-            </li>
-          </ul> -->
+
         </div>
       </div>
     </nav>
@@ -149,8 +146,8 @@
                       value="{{p_details.product_name}}"
                       name="product_name"
                       type="text"
-                      class="form-control validate"
-                      required
+                      class="form-control "
+                      
                     />
                   </div>
 
@@ -166,7 +163,7 @@
                       rows="3"
                       value="{{p_details.des}}"
                       name="des"
-                      required
+                     
                     />
                   </div>
 
@@ -189,6 +186,27 @@
                       {% endfor %}                    
                     </select>
                   </div>
+
+                  <div class="form-group mb-3 col-xs-12 col-sm-6">
+                    <label
+                      for="gram"
+                      >Gram
+                    </label>
+                    <input
+                      id="gram"
+                      value="{{p_details.gram}}"
+                      name="gram  "
+                      type="text"
+                      class="form-control "
+                      onekeyup="validateGram()"  
+                    />
+                    <span id="gram-error" class="m-l-30"></span>
+
+                  </div>
+
+
+
+
                   <div class="row">
                     <div class="form-group mb-3 col-xs-12 col-sm-6">
                       <label
@@ -196,83 +214,91 @@
                         >Price
                       </label>
                       <input
-                        id="stock"
+                        id="price1"
                         value="{{p_details.price}}"
                         name="price"
                         type="text"
-                        class="form-control validate"
-                        required
+                      class="form-control "
+
+                        onekeyup="validatePrice1()"
                       />
+                      <span id="price1-error" class="m-l-30"></span>
                     </div>
-                        <!-- <div class="form-group mb-3 col-xs-12 col-sm-6">
-                          <label
-                            for="stock"
-                            >Offer Price
-                          </label>
-                          <input
-                            id="stock"
-                            value="{{p_details.dis_price}}"
-                            name="dis_price"
-                            type="text"
-                            class="form-control validate"
-                            required
-                          />
-                        </div> -->
+
                         <div class="form-group mb-3 col-xs-12 col-sm-6">
                           <label
                             for="stock"
                             >Stock
                           </label>
                           <input
-                            id="stock"
+                            id="price"
                             value="{{p_details.stock}}"
                             name="stock"
                             type="text"
-                            class="form-control validate"
-                            required
+                      class="form-control "
+
+                            onekeyup="validatePrice()"
+                            
                           />
+                          <span id="price-error" class="m-l-30"></span>
+
                         </div>
                   </div>
                   
                         </div>
                         <div class="col-xl-6 col-lg-6 col-md-12 mx-auto mb-4">
-                          <!-- <div class="tm-product-img-dummy mx-auto">
-                            <i
-                              class="fas fa-cloud-upload-alt tm-upload-icon"
-                              onclick="document.getElementById('fileInput').click();"
-                            ></i>
-                          </div> -->
-                          <!-- <div class="custom-file mt-3 mb-3">
-                            <input id="fileInput" name='image' type="file" style="display:none;" />
-                            <input
-                              type="button"
-                              class="btn btn-primary btn-block mx-auto"
-                              value="UPLOAD PRODUCT IMAGE"
-                              onclick="document.getElementById('fileInput').click();"
-                            />
-                          </div> -->
+
 
                           <div class="form-group mt-3">
-                            <img src="" alt="" id="myimg" style="height:100px ;width:100px ;" >
-                            <label for="pimage">Image</label>
+                            <img src="{{p_details.img.url}}" alt="" id="myimg" style="height:100px ;width:100px ;" >
+                            <label for="pimage">Image 1</label>
                             <input type="file" class="form-control" name="image" id="image" accept="image/*" onchange=file_changed()  placeholder="Product Image">
                             <span id="errorimage" class="text-danger">
                           </div>
-                          <!-- <div id="crop">
-                            <div class="vald-info" id="info"></div>
-                            <h5 class="error_form text-danger" id="image1_error_message"></h5>
-                            <div style="display: flex">
-                                <div id="image-box1" class="image-container clr"
-                                    style="height: 300px; width: 20%">
-                                </div>
-                                <button type="button" class="btn btneds bg-success" id="crop-btn1"
-                                    style=" margin-top: 10px; display: none; width: 50%; margin: 20rem 0rem 0rem 0rem;">crop</button>
-                            </div>
-                        </div> -->
+
+                          <div class="form-group mt-3">
+                            <img src="{{p_details.img2.url}}" alt="" id="myimg" style="height:100px ;width:100px ;" >
+                            <label for="pimage">Image 2</label>
+                            <input type="file" class="form-control" name="image2" id="image" accept="image/*" onchange=file_changed2()  placeholder="Product Image">
+                            <span id="errorimage" class="text-danger">
+                          </div>
+
+
+                          <div class="form-group mt-3">
+                            <img src="{{p_details.img3.url}}" alt="" id="myimg" style="height:100px ;width:100px ;" >
+                            <label for="pimage">Image 3</label>
+                            <input type="file" class="form-control" name="image3" id="image" accept="image/*" onchange=file_changed3()  placeholder="Product Image">
+                            <span id="errorimage" class="text-danger">
+                          </div>
+
+
+                          <div class="form-group mt-3">
+                            <img src="{{p_details.img4.url}}" alt="" id="myimg" style="height:100px ;width:100px ;" >
+                            <label for="pimage">Image 4</label>
+                            <input type="file" class="form-control" name="image4" id="image" accept="image/*" onchange=file_changed4()  placeholder="Product Image">
+                            <span id="errorimage" class="text-danger">
+                          </div>
+
                         <script>
+                          function viewImage1(event){
+                            document.getElementById('viewImg1').src=URL.createObjectURL(event.target.files[0])
+                          }
+
+                          function viewImage2(event){
+                            document.getElementById('viewImg2').src=URL.createObjectURL(event.target.files[0])
+                          }
+                          function viewImage3(event){
+                            document.getElementById('viewImg3').src=URL.createObjectURL(event.target.files[0])
+                          }
+                          function viewImage4(event){
+                            document.getElementById('viewImg4').src=URL.createObjectURL(event.target.files[0])
+                          }
+
+
+
                           function file_changed(){
-                            var selectedFile = document.getElementById('image').files[0];
-                            var img = document.getElementById('myimg')
+                            var selectedFile = document.getElementById('viewImg1').files[0];
+                            var img = document.getElementById('image')
                           
                             var reader = new FileReader();
                             reader.onload = function(){
@@ -280,9 +306,140 @@
                             }
                             reader.readAsDataURL(selectedFile);
                            }
+
+                           function file_changed2(){
+                            var selectedFile = document.getElementById('viewImg2').files[0];
+                            var img = document.getElementById('image2')
+                          
+                            var reader = new FileReader();
+                            reader.onload = function(){
+                               img.src = this.result
+                            }
+                            reader.readAsDataURL(selectedFile);
+                           }
+
+                           function file_changed3(){
+                            var selectedFile = document.getElementById('viewImg3').files[0];
+                            var img = document.getElementById('image3')
+                          
+                            var reader = new FileReader();
+                            reader.onload = function(){
+                               img.src = this.result
+                            }
+                            reader.readAsDataURL(selectedFile);
+                           }
+                           
+                           function file_changed4(){
+                            var selectedFile = document.getElementById('viewImg4').files[0];
+                            var img = document.getElementById('image4')
+                          
+                            var reader = new FileReader();
+                            reader.onload = function(){
+                               img.src = this.result
+                            }
+                            reader.readAsDataURL(selectedFile);
+                           }
+
+
+
+
+
+
+
                         </script>
 
+<script>
 
+
+  var priceError = document.getElementById('price-error');
+  var price1Error = document.getElementById('price1-error');
+  var gramError = document.getElementById('gram-error');
+
+
+
+
+
+
+  function validatePrice() {
+    var price=document.getElementById('price').value.trim();  
+      if (price.length==0) {
+        priceError.innerHTML='Product stock is Required';
+        priceError.style.color='red'
+        return false;
+        }
+      if (!/^[0-9]+$/.test(price)) {
+            priceError.innerHTML = "stock must be digits"
+            priceError.style.color='red'
+            return false;
+    }
+          priceError.innerHTML='stock is valid';
+          priceError.style.color='green'
+          return true;
+    }
+
+    function validatePrice1() {
+      var price1=document.getElementById('price1').value.trim();  
+        if (price1.length==0) {
+          price1Error.innerHTML='Product price is Required';
+          price1Error.style.color='red'
+          return false;
+          }
+        if (!/^[0-9]+$/.test(price1)) {
+              price1Error.innerHTML = "Product price must be digits"
+              price1Error.style.color='red'
+              return false;
+      }
+            price1Error.innerHTML='Price is valid';
+            price1Error.style.color='green'
+            return true;
+      }
+
+      function validateGram() {
+        var gram1=document.getElementById('gram').value.trim();  
+          if (gram1.length==0) {
+            gramError.innerHTML=' Gram is Required';
+            gramError.style.color='red'
+            return false;
+            }
+         
+              gramError.innerHTML='Gram is valid';
+              gramError.style.color='green'
+              return true;
+        }
+
+
+        jQuery_1_7_1(document).on("submit", "form", function (e) {
+            
+          validatePrice()
+          validatePrice1()
+          validateGram()
+          
+
+
+
+
+
+
+
+          
+          
+         
+          if ( validatePrice() && validatePrice1() && validateGram()  ) { 
+             
+          } else {
+            e.preventDefault();
+            swal('Invalid data! Ensure You have entered correct data');
+            return true;
+          }
+        });
+
+
+
+
+
+
+
+</script>
 
                         </div>
 

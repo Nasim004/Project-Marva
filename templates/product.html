@@ -8,14 +8,6 @@
 
 
 
-
-
-
-
-
-
-
-
 <div class="bg0 m-t-100 p-b-140">
     <div class="container">
         <div class="flex-w flex-sb-m p-b-52">
@@ -24,104 +16,187 @@
                 <h3 class="text-center font-weight-bold" style="color: #4D0808; font-family:poppins;text-transform: uppercase;">{{category.category_name}}</h3>
             </div>
 
+            <div class="flex-w flex-c-m m-tb-10">
+                <div class="flex-c-m stext-106 cl6 size-104 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-filter">
+                    <i class="icon-filter cl2 m-r-6 fs-15 trans-04 zmdi zmdi-filter-list"></i>
+                    <i class="icon-close-filter cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
+                     Filter
+                </div>
+
+                <div class="flex-c-m stext-106 cl6 size-105 bor4 pointer hov-btn3 trans-04 m-tb-4 js-show-search">
+                    <i class="icon-search cl2 m-r-6 fs-15 trans-04 zmdi zmdi-search"></i>
+                    <i class="icon-close-search cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
+                    Search
+                </div>
+            </div>
             
-        </div> 
+            <!-- Search product -->
+            <div class="dis-none panel-search w-full p-t-10 p-b-15">
+                <div class="bor8 dis-flex p-l-15">
+                    <button class="size-113 flex-c-m fs-16 cl2 hov-cl1 trans-04">
+                        <i class="zmdi zmdi-search"></i>
+                    </button>
 
-        
-
-        <div class="row isotope-grid">
-
-            {%for p in product %}
-    <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
-        <!-- Block2 -->
-
-        
-
-        <div class="block2">
-            <div class="block2-pic hov-img0">
-
-                <a href="/admins/productinfo/{{p.id}}">
-                <img src="{{p.img.url}}" alt="IMG-PRODUCT">
-                </a>
-
-                <!-- <a href="productinfo" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-                    Quick View
-                </a> -->
+                    <form action="">
+                        <input class="mtext-107 cl2 size-114 plh2 p-r-15" id="search" type="search" name="search" placeholder="Search">
+                    <button class="btn btn-primary d-none">Search</button>
+                    </form>
+                </div>	
             </div>
 
-            <div class="block2-txt flex-w flex-t p-t-14">
-                <div class="block2-txt-child1 flex-col-l ">
-                    <a href="/admins/productinfo/{{p.id}}" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-                        {{p.product_name}}
-                    </a>
-
-                    {%if p.p_offer_price < 1 and p.c_offer_price < 1  %}
-                        <span class="stext-105 cl3" style="font-weight: bold;">
-                            ₹{{p.price}}
-                        </span>
-
-                    {%elif p.p_offer_price > 1 and p.c_offer_price is 0 %}
-                        
-
-                        <span class="stext-105 cl3" style="font-weight: bold;">
-                            ₹{{p.p_offer_price}} <span class="stext-105 cl3" style=" text-decoration: line-through;">
-                                ₹{{p.price}}
-                            </span>
-                           <span style="font-weight: 400;color: red;"> ({{p.p_offer}}% OFF)</span> 
-                        </span>
-                        
-                    {%elif p.p_offer_price < 1 and p.c_offer_price > 1 %}
-                        <span class="stext-105 cl3" style="font-weight: bold;">
-                            ₹{{p.c_offer_price}}  <span class="stext-105 cl3" style=" text-decoration: line-through;">
-                                ₹{{p.price}} 
-                            </span>
-                            <span style="font-weight: 400;color: red;">  ({{p.c_offer}}% OFF)</span> 
-                        </span>
-                      
+            <!-- Filter -->
+            <div class="dis-none panel-filter w-full p-t-10">
+                <div class="wrap-filter flex-w bg6 w-full p-lr-40 p-t-27 p-lr-15-sm">
                     
-                    {%elif p.p_offer_price < p.c_offer_price and p.c_offer_price > 1 %}
-                        <span class="stext-105 cl3" style="font-weight: bold;">
-                            ₹{{p.p_offer_price}} <span class="stext-105 cl3" style=" text-decoration: line-through;">
-                                ₹{{p.price}} 
-                            </span>
-                           <span style="font-weight: 400;color: red;">  ({{p.p_offer}}% OFF)</span> 
-                        </span>
-                        
 
-                        
-                    {%elif p.c_offer_price < p.p_offer_price and p.p_offer_price > 1 %}
-                       
-                        <span class="stext-105 cl3" style="font-weight: bold;">
-                            ₹{{p.c_offer_price}}  <span class="stext-105 cl3" style=" text-decoration: line-through;">
-                                ₹{{p.price}} 
-                            </span>
-                           <span style="font-weight: 400;color: red;">  ({{p.c_offer}}% OFF)</span> 
-                        </span>
-                        
-                    {%elif p.c_offer_price == p.p_offer_price and p.p_offer_price > 1 and p.c_offer_price > 1 %}
-                        
+                    <div class="filter-col2 p-r-15 p-b-27">
+                        <div class="mtext-102 cl2 p-b-15">
+                            Price
+                        </div>
 
-                        <span class="stext-105 cl3" style="font-weight: bold;">
-                            ₹{{p.p_offer_price}}  <span class="stext-105 cl3" style=" text-decoration: line-through;">
-                                ₹{{p.price}}  
-                            </span>
-                            <span style="font-weight: 400;color: red;">  ({{p.p_offer}}% OFF) </span> 
-                        </span>
-                        
-                    {% else %}
+                        <form action="">
+                            <select class="form-control" name="price" id="price-list" onchange="location = finalurl2();" style="margin-left: auto;">
+                                <option value="" id="price-placeholder" disabled selected hidden>Price</option>
+                                <option id="pr10000" value="10000">less than ₹10000</option>
+                                <option id="pr40000" value="40000">less than ₹40000</option>
+                                <option id="pr80000" value="80000">less than ₹80000</option>
+                                <option id="pr100000" value="100000">less than ₹100000</option>
+                              </select>
+                        </form>
+                    </div>
+
+
+                    <div class="filter-col2 p-r-15 p-b-27">
+                        <div class="mtext-102 cl2 p-b-15">
+                            Gram
+                        </div>
+
+                        <form action="">
+                            <select class="form-control" name="gram" id="gram-list" onchange="location = finalurl3();" style="margin-left: auto;">
+                                <option value="" id="gram-placeholder" disabled selected hidden>Gram</option>
+                                <option id="pr8" value="8">less than 8gm</option>
+                                <option id="pr16" value="16">less than 16gm</option>
+                                <option id="pr32" value="32">less than 32gm</option>
+                                <option id="pr40" value="40">less than 40gm</option>
+                                <option id="pr60" value="60">less than 60gm</option>
+                                <option id="pr80" value="80">less than 80gm</option>
+
+                              </select>
+                        </form>
+                    </div>
 
                     
-                    {% endif %}  
+
+                    
                 </div>
             </div>
         </div>
+
+                <div class="row isotope-grid">
+
+                {%for p in product %}
+                 <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
+                        <!-- Block2 -->
+                
+                        
+                
+                        <div class="block2">
+                            <div class="block2-pic hov-img0">
+                
+                                <a href="/admins/productinfo/{{p.id}}">
+                                <img src="{{p.img.url}}" alt="IMG-PRODUCT">
+                                </a>
+                
+                                <!-- <a href="productinfo" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
+                                    Quick View
+                                </a> -->
+                            </div>
+                
+                            <div class="block2-txt flex-w flex-t p-t-14">
+                                <div class="block2-txt-child1 flex-col-l ">
+                                    <a href="/admins/productinfo/{{p.id}}" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+                                        {{p.product_name}}
+                                    </a>
+                
+                                    {%if p.p_offer_price < 1 and p.c_offer_price < 1  %}
+                                        <span class="stext-105 cl3" style="font-weight: bold;">
+                                            ₹{{p.price}}
+                                        </span>
+                
+                                    {%elif p.p_offer_price > 1 and p.c_offer_price is 0 %}
+                                        
+                
+                                        <span class="stext-105 cl3" style="font-weight: bold;">
+                                            ₹{{p.p_offer_price}} <span class="stext-105 cl3" style=" text-decoration: line-through;">
+                                                ₹{{p.price}}
+                                            </span>
+                                           <span style="font-weight: 400;color: red;"> ({{p.p_offer}}% OFF)</span> 
+                                        </span>
+                                        
+                                    {%elif p.p_offer_price < 1 and p.c_offer_price > 1 %}
+                                        <span class="stext-105 cl3" style="font-weight: bold;">
+                                            ₹{{p.c_offer_price}}  <span class="stext-105 cl3" style=" text-decoration: line-through;">
+                                                ₹{{p.price}} 
+                                            </span>
+                                            <span style="font-weight: 400;color: red;">  ({{p.c_offer}}% OFF)</span> 
+                                        </span>
+                                      
+                                    
+                                    {%elif p.p_offer_price < p.c_offer_price and p.c_offer_price > 1 %}
+                                        <span class="stext-105 cl3" style="font-weight: bold;">
+                                            ₹{{p.p_offer_price}} <span class="stext-105 cl3" style=" text-decoration: line-through;">
+                                                ₹{{p.price}} 
+                                            </span>
+                                           <span style="font-weight: 400;color: red;">  ({{p.p_offer}}% OFF)</span> 
+                                        </span>
+                                        
+                
+                                        
+                                    {%elif p.c_offer_price < p.p_offer_price and p.p_offer_price > 1 %}
+                                       
+                                        <span class="stext-105 cl3" style="font-weight: bold;">
+                                            ₹{{p.c_offer_price}}  <span class="stext-105 cl3" style=" text-decoration: line-through;">
+                                                ₹{{p.price}} 
+                                            </span>
+                                           <span style="font-weight: 400;color: red;">  ({{p.c_offer}}% OFF)</span> 
+                                        </span>
+                                        
+                                    {%elif p.c_offer_price == p.p_offer_price and p.p_offer_price > 1 and p.c_offer_price > 1 %}
+                                        
+                
+                                        <span class="stext-105 cl3" style="font-weight: bold;">
+                                            ₹{{p.p_offer_price}}  <span class="stext-105 cl3" style=" text-decoration: line-through;">
+                                                ₹{{p.price}}  
+                                            </span>
+                                            <span style="font-weight: 400;color: red;">  ({{p.p_offer}}% OFF) </span> 
+                                        </span>
+                                        
+                                    {% else %}
+                
+                                    
+                                    {% endif %} 
+                                    <button onclick=addtocart({{p.id}}) class="btn btn-light bor2 hov-btn1  flex-c-m stext-103 cl2  ">
+                                        Add to Cart
+                                    </button> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                        
+                       
+                    </div>           
+                 </div>
+            </div>
+        </div>
+        </div> 
     </div>
-    {% endfor %}
-    
-</div>   
-</div>
-</div>
-{% if is_paginated %}
+
+
+
+
+    {% if is_paginated %}
     <nav class="pagination flex-c-m flex-w w-full p-t-45">
       <ul class="pagination ">
         {% if page_obj.has_previous %}
@@ -148,5 +223,56 @@
       </ul>
     </nav>
     {% endif %}
+
+
+    <script>
+        function addtocart(id){
+            $.ajax({
+                url:'/cart/addtocart2/'+id,
+                method:'get',
+                success:(response)=>{
+                    console.log(response.status)
+                    if(response.status){
+                        swal('Item added to Cart');
+                    }
+                }
+            })
+        }
+    </script>
+
+
+
+
+
+
+    <script>
+        function finalurl2() {
+            var url = new URL(window.location.href);
+            var search_params = url.searchParams;
+            search_params.set('price', document.getElementById("price-list").value);
+            url.search = search_params.toString();
+            var new_url = url.toString();
+            return new_url
+          }
+    </script>
+
+
+    <script>
+        function finalurl3() {
+            var url = new URL(window.location.href);
+            var search_params = url.searchParams;
+            search_params.set('gram', document.getElementById("gram-list").value);
+            url.search = search_params.toString();
+            var new_url = url.toString();
+            return new_url
+          }
+    </script>
+
+
+
+
+
+
+    
 
 {%endblock%}

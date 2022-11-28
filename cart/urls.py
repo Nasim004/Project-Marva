@@ -8,6 +8,7 @@ urlpatterns=[
 
     path('cart',views.cart,name='cart'),
     path('addtocart/<int:id>',views.addtocart,name='addtocart'),
+    path('addtocart2/<int:id>',views.addtocart2,name='addtocart2'),
     path('minus/<int:id>',views.minus,name='minus'),
     path('up/<int:id>',views.up,name='up'),
     path('removecart/<int:id>',views.removecart,name='removecart'),

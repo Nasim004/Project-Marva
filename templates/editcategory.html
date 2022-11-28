@@ -16,6 +16,10 @@
     <link rel="stylesheet" href="{% static 'cssadminpanel/bootstrap.min.css' %}" />
     <!-- https://getbootstrap.com/ -->
     <link rel="stylesheet" href="{% static 'cssadminpanel/templatemo-style.css' %}">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script type="text/javascript">
+      var jQuery_1_7_1 = $.noConflict(true);
+      </script>	
   </head>
 
 
@@ -122,10 +126,20 @@
                       value="{{category.category_name}}"
                       name="category_name"
                       type="text"
-                      class="form-control validate"
-                      required
+                      class="form-control "
+                      onekeyup="validateLname()"
                     />
+                    <span id="lastname-error" class="m-l-30"></span>
                   </div>
+
+
+                  <div class="form-group mt-3">
+                    <img src="{{category.img1.url}}" alt="" id="myimg" style="height:100px ;width:100px ;" >
+                    <label for="pimage">Image 1</label>
+                    <input type="file" class="form-control" name="image" id="image" accept="image/*" onchange=file_changed()  placeholder="Product Image">
+                    
+                  </div>
+
                         </div>
                         <div class="col-12">
                           <button type="submit" class="btn btn-primary btn-block text-uppercase">Edit Category Now</button>
@@ -136,6 +150,72 @@
         </div>
       </div>
     </div>
+    <script>
+
+      function viewImage1(event){
+        document.getElementById('viewImg1').src=URL.createObjectURL(event.target.files[0])
+      }
+
+
+      function file_changed(){
+        var selectedFile = document.getElementById('viewImg1').files[0];
+        var img = document.getElementById('image')
+      
+        var reader = new FileReader();
+        reader.onload = function(){
+           img.src = this.result
+        }
+        reader.readAsDataURL(selectedFile);
+       }
+
+
+    </script>
+
+    <script>
+      var lastnameError = document.getElementById('lastname-error');
+
+    
+    
+      function validateLname() {
+        var lastname=document.getElementById('name').value.trim();
+        var Required=2;
+        var left=Required - lastname.length;
+        if (lastname.length==0) {
+          lastnameError.innerHTML='Category name is required';
+          lastnameError.style.color='red'
+          return false;
+          }
+        if (left>0){
+        
+          lastnameError.innerHTML =left+ 'more character required';
+          lastnameError.style.color='red'
+          return false;
+        
+        }
+        
+        
+        lastnameError.innerHTML='Valid';
+        lastnameError.style.color='green'
+        return true;
+        }
+    
+    
+
+    
+    jQuery_1_7_1(document).on("submit", "form", function (e) {
+                
+     
+      validateLname()
+      
+      if ( validateLname() ) { 
+         
+      } else {
+        e.preventDefault();
+        swal('Invalid data! Ensure You have entered correct data');
+        return true;
+      }
+    });
+    </script>
 
     <script src="{% static 'jsadminpanel/jquery-3.3.1.min.js' %}"></script>
     <!-- https://jquery.com/download/ -->
