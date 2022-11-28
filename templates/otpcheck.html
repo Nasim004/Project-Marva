@@ -104,13 +104,27 @@
           <div class="text-center mt-5">
               <input type="submit"   id="signin" class="form-submit" value="Log in"  />
           </div>
-          <div class="text-center mt-5">
+          <div class="mt-3 text-center">
+            <div class="text-center">
+              <i id="btnCounter" style="color: rgb(0, 0, 0);">Time left: <span id="count"></span></i>
+            </div>
+            <div class="text-center">
+            
+              <a href="login_resend/{{phone}}" >
+                <i id="resend" style="color: transparent;text-decoration: none;" >Resend OTP</i>
+          
+                      </a>
+            </div>
+          </div>
+
+          </div>
+          <!-- <div class="text-center mt-5">
             <a href="login_resend/{{phone}}">
       
               <i  id="btnCounter" disabled>Time left:<span id="count"></span><br>Resend OTP</i>
           
             </a>
-          </div>
+          </div> -->
 
       </div>
       
@@ -168,7 +182,7 @@
 
 </script>
 
-<script>
+<!-- <script>
   // Get refreence to span and button
 var spn = document.getElementById("count");
 var btn = document.getElementById("btnCounter");
@@ -189,8 +203,32 @@ var timer = null;  // For referencing the timer
     btn.removeAttribute("disabled");
   }
 }());
-</script>
+</script> -->
 
+<script>
+  // Get refreence to span and button
+var spn = document.getElementById("count");
+var btn = document.getElementById("btnCounter");
+
+var count = 20;     // Set count
+var timer = null;  // For referencing the timer
+
+(function countDown(){
+  // Display counter and start counting down
+  spn.textContent = count;
+  
+  // Run the function again every second if the count is not zero
+  if(count !== 0){
+    timer = setTimeout(countDown, 1000);
+    count--; // decrease the timer
+  } else {
+    // Enable the button
+    //btn.removeAttribute("disabled");
+    document.getElementById("resend").style.color="black";
+    document.getElementById("btnCounter").style.color="transparent";
+  }
+}());
+</script>
 
 
 

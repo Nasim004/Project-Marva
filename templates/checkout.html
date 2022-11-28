@@ -241,6 +241,12 @@
           //var amount = $('#grand_total').val()
           //var cart = $('#cart').val()
           var address = $('#addd').val()
+          if (address == undefined){
+            swal('Payment Failed , Add Shipping Address').then(()=>{
+                        location.reload();
+                        })
+                      }
+          else{
           var payment = "PayPal"
           var token = $("input[name='csrfmiddlewaretoken']").val()
           $.ajax({
@@ -267,6 +273,7 @@
              
             }
           })
+        }
         });
       }
     }).render('#paypal-button-container');
@@ -284,6 +291,12 @@
   $(document).ready(function() {
     $('#rzp-button1').click(function (e) { 
       var address = $('#addd').val()
+      if (address == undefined){
+        swal('Payment Failed , Add Shipping Address').then(()=>{
+                    location.reload();
+                    })
+                  }
+      else{
       var payment = "Razorpay"
       var token = $("input[name='csrfmiddlewaretoken']").val()
       e.preventDefault();
@@ -343,6 +356,7 @@
                 rzp1.open();
             }
         });
+      }
     });
 });
 </script>

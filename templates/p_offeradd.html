@@ -117,7 +117,7 @@
               </div>
               <div class="row tm-edit-product-row">
                 <div class="col-xl-6 col-lg-6 col-md-12">
-                  <form action="p_offeradd" method="post" class="tm-edit-product-form"  enctype="multipart/form-data">
+                  <form action="p_offeradd"  id="poffer_val" method="post" class="tm-edit-product-form"  enctype="multipart/form-data">
   
   
                       {%csrf_token%}
@@ -258,4 +258,29 @@
           })
       })
 
+    </script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js"></script>
+<!-- This a easy validation -->
+<script>
+
+$(document).ready(function () {
+  $("#poffer_val").validate({
+    rules: {
+      name: {
+        required: true,
+        minlength: 3,
+      },
+      offer: {
+        required: true,
+        minlength: 1,
+      },
+      upto: {
+        required: true,
+        minlength: 2,
+      },
+    },
+  });
+});
     </script>

@@ -21,6 +21,12 @@
     <link rel="stylesheet" href="{%static 'cssadminpanel/templatemo-style.css' %}">
 </head>
 
+<style>
+  .error {
+      color: red;
+   }
+</style>
+
 <body id="reportsPage">
     <div class="" id="home">
         <nav class="navbar navbar-expand-xl">
@@ -120,7 +126,7 @@
               </div>
               <div class="row tm-edit-product-row">
                 <div class="col-xl-6 col-lg-6 col-md-12">
-                  <form action="c_offeradd" method="post" class="tm-edit-product-form"  enctype="multipart/form-data">
+                  <form action="c_offeradd" id="coffer_val" method="post" class="tm-edit-product-form"  enctype="multipart/form-data">
   
   
                       {%csrf_token%}
@@ -134,7 +140,7 @@
                         id="name"
                         name="name"
                         type="text"
-                        class="form-control validate"/>
+                        class="form-control "/>
                           
   
                     </div>
@@ -163,7 +169,7 @@
                         >Offer Percentage</label
                       >
                       <input
-                        class="form-control validate"
+                        class="form-control "
                        type="number"
                        min="1" max="30"
                         name="offer"
@@ -176,9 +182,10 @@
                         >Upto </label
                       >
                       <input
-                        class="form-control validate"
+                        class="form-control "
                        type="number"
                         name="upto"
+                        min="1" max="100000"
                         id="upto"/>    
                     </div>
   
@@ -189,7 +196,7 @@
                         >
                         <input
 
-                          class="form-control validate"
+                          class="form-control "
                           name="startdate"
                           id="startdate"
                           type="date"
@@ -209,7 +216,7 @@
                         >
                         <input
 
-                          class="form-control validate"
+                          class="form-control "
                           name="enddate"
                           id="enddate"
                           type="date"
@@ -265,5 +272,30 @@
               let date = document.getElementById('startdate').value
               $('#exp').attr('min', date)
           })
-      })
+    })
   </script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js"></script>
+  <!-- This a easy validation -->
+  <script>
+  
+  $(document).ready(function () {
+    $("#coffer_val").validate({
+      rules: {
+        name: {
+          required: true,
+          minlength: 3,
+        },
+        offer: {
+          required: true,
+          minlength: 1,
+        },
+        upto: {
+          required: true,
+          minlength: 2,
+        },
+      },
+    });
+  });
+      </script>

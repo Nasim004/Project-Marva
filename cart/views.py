@@ -293,7 +293,10 @@ def removecart(request,id):
 def checkout(request):
  c1=Category.objects.all()
  if request.user.is_authenticated:
- 
+
+    if request.method == 'POST' and 'address_id' not in request.POST and 'code' not in request.POST :
+        messages.error(request,"Failed, Please Add Address")
+        return redirect('checkout')
     if request.method == 'POST' and 'address_id' in request.POST   :
         address_id = request.POST['address_id']
         payment = request.POST['payment_selector']
