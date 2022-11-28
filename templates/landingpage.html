@@ -235,6 +235,18 @@
 
 	</div>
 </footer>
+
+
+{% if messages %}
+                    {% for message in messages %}
+                    <script>
+                        swal('{{message}}')
+                    </script>
+                    {% endfor %}
+{% endif %}
+
+
+
 {%endblock%}
 
 
