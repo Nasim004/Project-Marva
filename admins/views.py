@@ -320,7 +320,7 @@ def category_update(request,id):
     if request.method == 'POST':
         category=Category.objects.get(id=id) 
         category_name=request.POST.get('category_name')  
-        image=request.FILES.get('image',category.img1)  
+        image=request.FILES.get('image',category.img1)   
         category.category_name=category_name
         category.img1=image
         category.save()

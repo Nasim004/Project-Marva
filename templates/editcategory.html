@@ -111,7 +111,7 @@
             </div>
             <div class="row tm-edit-product-row">
               <div class="col-xl-6 col-lg-6 col-md-12">
-                <form action="/admins/category_update/{{category.id}}" method="post" class="tm-edit-product-form">
+                <form action="/admins/category_update/{{category.id}}" method="post" class="tm-edit-product-form" enctype="multipart/form-data">
 
 
                     {%csrf_token%}
@@ -134,7 +134,7 @@
 
 
                   <div class="form-group mt-3">
-                    <img src="{{category.img1.url}}" alt="" id="myimg" style="height:100px ;width:100px ;" >
+              
                     <label for="pimage">Image 1</label>
                     <input type="file" class="form-control" name="image" id="image" accept="image/*" onchange=file_changed()  placeholder="Product Image">
                     
